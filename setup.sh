@@ -5,7 +5,10 @@ source venv/bin/activate
 python3 -m pip install Django
 
 # frontend
-npx create-react-app  main
+yarn create vite main --template react
 cd main
-npm install -D tailwindcss
-npx tailwindcss init
+yarn
+yarn dev
+yarn add -D tailwindcss postcss autoprefixer
+yarn tailwindcss init -p
+yarn dev
