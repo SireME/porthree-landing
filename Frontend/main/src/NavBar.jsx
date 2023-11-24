@@ -21,7 +21,7 @@ function Logo() {
 function Login() {
     return(
     <div className='border border-slate-800 px-2 py-1rounded-lg'>
-        <button>signup/Login</button>
+        <button>sign-up/Login</button>
     </div>
     )
 }
