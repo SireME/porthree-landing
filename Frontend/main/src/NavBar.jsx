@@ -43,7 +43,7 @@ function NavSearch() {
 
 export default function NavBar(){
     return(
-        <div className='flex items-baseline justify-between align-center border-b relative fixed px-20 py-4 text-white'>
+        <div className='flex items-baseline justify-between align-center border-b px-20 py-4 fixed w-full bg-blue bg-opacity-50'>
             <Logo />
             <NavLinks />
             <NavSearch />
