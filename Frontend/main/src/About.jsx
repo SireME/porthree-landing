@@ -13,7 +13,7 @@ export default function About() {
                             tellus mauris a. Vitae auctor eu augue ut lectus. Purus viverra accumsan in
                             nisl nisi scelerisque eu. Iaculis urna id volutpat lacus.</p>
                     </div>
-                    <div>Read More...</div>
+                    <div><button className="border px-2 font-bold">Read More...</button></div>
                 </div>
             </div>
         </div>
