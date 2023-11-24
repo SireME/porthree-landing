@@ -6,11 +6,12 @@ import Posts from './Posts.jsx'
 import Projects from './Projects.jsx'
 import About from './About.jsx'
 import Faq from './Faq.jsx'
+import Footer from './Footer.jsx'
 
 function App() {
   return (
     <>
-      <div className=''>
+      <div className='grid gap-2'>
         <NavBar />
         <div className='px-20 grid gap-36'>
           <Hero />
@@ -19,6 +20,7 @@ function App() {
           <About />
           <Faq />
         </div>
+        <Footer />
       </div>
     </>
   )
