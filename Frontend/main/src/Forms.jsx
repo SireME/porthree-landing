@@ -1,5 +1,5 @@
 
-function LoginForm() {
+function LoginForm({ isToggled }) {
     return (
         <div className="border bg-blue bg-opacity-70 py-10 px-5 absolute align-self-middle m-auto rounded-xl grid justify-center text-center gap-y-3">
             <div className="font-bold text-2xl">Porthree</div>
@@ -74,12 +74,12 @@ function SignUpForm() {
 export default function Forms() {
     return (
         <>
-        <div className='hidden fixed flex justify-center items-center h-screen w-full bg-transparent z-10'>
-            <LoginForm />
-        </div>
-        <div className=' fixed flex justify-center items-center h-screen w-full bg-transparent z-10'>
-            <SignUpForm />
-        </div>
+            <div className={`${isToggled ? 'hidden' : ''} fixed flex justify-center items-center h-screen w-full bg-transparent z-10`}>
+                <LoginForm />
+            </div>
+            <div className='hidden  fixed flex justify-center items-center h-screen w-full bg-transparent z-10'>
+                <SignUpForm />
+            </div>
         </>
     )
 }
