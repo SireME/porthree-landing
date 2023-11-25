@@ -1,7 +1,11 @@
+import React from 'react'
 
-function LoginForm({ isToggled }) {
+function LoginForm(onClick) {
+    const handleClick = (e) => {
+        e.stopPropagation();
+    }
     return (
-        <div className="border bg-blue bg-opacity-70 py-10 px-5 absolute align-self-middle m-auto rounded-xl grid justify-center text-center gap-y-3">
+        <div onClick={onClick} className="border bg-blue bg-opacity-70 py-10 px-5 absolute align-self-middle m-auto rounded-xl grid justify-center text-center gap-y-3">
             <div className="font-bold text-2xl">Porthree</div>
             <div className=""><p className="text-sm font-bold">Login to your porthree Dashboard</p></div>
             <div className="border rounded-xl font-bold flex justify-center gap-5 py-px"><div className="border rounded-full w-6 h-6"></div><button>Continue with Google</button></div>
@@ -20,10 +24,13 @@ function LoginForm({ isToggled }) {
                         <input type="password" name="email" id="" placeholder="Password" className="rounded px-5 h-8 w-full outline-0" />
                     </div>
                     <div className="justify-self-start">
-                        <input type="checkbox" name="remember" id="" />
+                        <label htmlFor="remember" className='font-medium'>
+                            <input type="checkbox" name="remember" id="remember" />
+                            Remember me?
+                        </label>
                     </div>
-                    <p className="font-xs">No Porthree account yet? <a className="font-medium" href="">Sign-up</a></p>
-                    <p className="font-xs">Forgotten Porthree credentials? <a className="font-medium" href="">recover</a></p>
+                    <p className="font-xs">No Porthree account yet? <a className="font-medium" href="#">Sign-up</a></p>
+                    <p className="font-xs">Forgotten Porthree credentials? <a className="font-medium" href="#">recover</a></p>
                     <button type="submit" className="border rounded font-bold">Login</button>
                 </form>
             </div>
@@ -59,25 +66,24 @@ function SignUpForm() {
                     <div>
                         <input type="password" name="email" id="" placeholder="Password" className="rounded px-5 h-8 w-full outline-0" />
                     </div>
-                    <div className="justify-self-start">
+                    {/* <div className="justify-self-start">
                         <input type="checkbox" name="remember" id="" />
-                    </div>
-                    <p className="font-xs">No Porthree account yet? <a className="font-medium" href="">Sign-up</a></p>
-                    <p className="font-xs">Forgotten Porthree credentials? <a className="font-medium" href="">recover</a></p>
-                    <button type="submit" className="border rounded font-bold">Login</button>
+                    </div> */}
+                    <p className="font-xs">Already have account with Porthree? <a className="font-medium" href="#">Login</a></p>
+                    <button type="submit" className="border rounded font-bold">Create Acount</button>
                 </form>
             </div>
         </div>
     )
 }
 
-export default function Forms() {
+export default function Forms({ toggleSign, toggleLog, handleLog }) {
     return (
         <>
-            <div className={`${isToggled ? 'hidden' : ''} fixed flex justify-center items-center h-screen w-full bg-transparent z-10`}>
-                <LoginForm />
+            <div onClick={handleLog} className={`bg-transparent fixed flex justify-center items-center h-screen w-full  z-10 ${toggleLog ? '' : 'hidden'}`}>
+                <LoginForm onClick={handleLog} />
             </div>
-            <div className='hidden  fixed flex justify-center items-center h-screen w-full bg-transparent z-10'>
+            <div className={`hidden fixed flex justify-center items-center h-screen w-full bg-transparent z-10`}>
                 <SignUpForm />
             </div>
         </>

@@ -13,9 +13,6 @@ import Forms from './Forms.jsx'
 function App() {
   return (
     <>
-      <div>
-        <Forms />
-      </div>
       <div className='grid gap-2'>
         <NavBar />
         <div className='px-20 grid gap-36'>

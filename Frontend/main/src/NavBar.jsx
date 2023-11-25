@@ -1,5 +1,14 @@
-import { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Forms from './Forms'
+import './App.css'
+
+function Button({ buttonText, handle }) {
+    return (
+        <div className='border border-slate-800 px-2 py-1rounded-lg'>
+            <button onClick={handle}>{buttonText}</button>
+        </div>
+    )
+}
 
 function NavLinks() {
     return (
@@ -19,16 +28,6 @@ function Logo() {
     )
 }
 
-function Login({ isToggled, onToggle }) {
-    return (
-        <div className='border border-slate-800 px-2 py-1rounded-lg'>
-            <button onClick={onToggle}
-                className={`${isToggled ? 'hidden' : ''}`}
-            > sign - up / Login</button>
-        </div >
-    )
-}
-
 function NavSearch() {
     return (
         <div className='flex align-center p-1 rounded-lg'>
@@ -44,20 +43,32 @@ function NavSearch() {
     )
 }
 
-export default function NavBar() {
+function NavBar() {
+    const [toggle, setToggle] = useState(false)
 
-    const [isToggled, setToggled] = useState(false);
-
+    /* useEffect(() => {
+        toggle ? console.log('toggled') : console.log('un-toggled')
+    }, [toggle]); */
     const handleToggle = () => {
-        setToggled(!isToggled);
-    };
+        setToggle(!toggle)
+    }
 
     return (
-        <div className='flex items-baseline justify-between align-center border-b px-20 py-4 fixed w-full bg-blue bg-opacity-50'>
-            <Logo />
-            <NavLinks />
-            <NavSearch />
-            <Login isToggled={isToggled}/>
-        </div>
-    )
-}
+
+        <>
+            <div className='flex items-baseline justify-between align-center border-b px-20 py-4 fixed w-full bg-blue bg-opacity-50'>
+                <Logo />
+                <NavLinks />
+                <NavSearch />
+                <Button buttonText={'login/Sign-in'} handle={handleToggle} />
+            </div>
+
+            <div>
+                <Forms toggleLog={toggle} handleLog={handleToggle} />
+            </div>
+        </>
+    );
+};
+
+export { Button };
+export default NavBar;
