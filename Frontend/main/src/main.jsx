@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Root from './routes/root.jsx'
-import Sign from './routes/Sign.jsx'
-import Portfolio from './routes/Portfolio.jsx'
+import Root from './routes/root'
+import Sign from './routes/Sign'
+import Portfolio from './routes/Portfolio'
 import ErrorPage from "./error-page";
 import {
   createBrowserRouter,
@@ -16,13 +16,15 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "sign-up",
+        element: <Sign />,
+      },
+    ],
   },
   {
-    path: "sign-up",
-    element: <Sign />,
-  },
-  {
-    path: "user",
+    path: "Portfolio/:userId",
     element: <Portfolio />,
   },
 ]);

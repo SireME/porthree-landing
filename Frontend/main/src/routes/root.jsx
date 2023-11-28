@@ -7,6 +7,7 @@ import Projects from './PortMain/Projects.jsx'
 import About from './PortMain/About.jsx'
 import Faq from './PortMain/Faq.jsx'
 import Footer from './PortMain/Footer.jsx'
+import { Outlet } from 'react-router-dom'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <>
       <div className='grid gap-2'>
         <NavBar />
+        <Outlet/>
         <div className='px-20 grid gap-36'>
           <Hero />
           <Posts />
