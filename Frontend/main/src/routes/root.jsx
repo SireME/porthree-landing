@@ -1,13 +1,12 @@
 // import { useState } from 'react'
-import './App.css'
-import NavBar from './NavBar.jsx'
-import Hero from './Hero.jsx'
-import Posts from './Posts.jsx'
-import Projects from './Projects.jsx'
-import About from './About.jsx'
-import Faq from './Faq.jsx'
-import Footer from './Footer.jsx'
-import Forms from './Forms.jsx'
+// import './App.css'
+import NavBar from './PortMain/NavBar.jsx'
+import Hero from './PortMain/Hero.jsx'
+import Posts from './PortMain/Posts.jsx'
+import Projects from './PortMain/Projects.jsx'
+import About from './PortMain/About.jsx'
+import Faq from './PortMain/Faq.jsx'
+import Footer from './PortMain/Footer.jsx'
 
 
 function App() {
