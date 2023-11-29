@@ -8,7 +8,7 @@ function Button({ action, value }) {
 
 function Tool(name) {
     return(
-        <div className="grid w-full justify-center">
+        <div className="grid justify-center">
                 <div className="border rounded-full  w-10 h-10 justify-self-center"></div>
                 <div><p className="font-medium">Tool name</p></div>
             </div>
@@ -17,7 +17,7 @@ function Tool(name) {
 
 function HeroTools() {
     return (
-        <div className="flex py-1 overflow-x-scroll ">
+        <div className="flex flex-wrap justify-center p-10 gap-5">
             <Tool/>
             <Tool/>
             <Tool/>

@@ -2,19 +2,19 @@ import React from "react";
 import { Button } from "./PortfolioHero";
 
 
-export function Title2() {
+export function Title2({ name }) {
     return (
-        <div className="w-full">
-            <h2 className="text-3xl font-bold">Contact</h2>
+        <div className="w-full mb-10">
+            <h2 className="text-3xl font-bold">{name}</h2>
         </div>
     )
 }
 
 function ContactIcon({ text }) {
     return (
-        <div className="flex">
+        <div className="flex h-fit">
             <div className={`w-10 h-10 border ${text ? 'mr-2' : ''}`}></div>
-            <div className="flex"><p className="m-auto">{text}</p></div>
+            <div className="flex h-fit"><p className="m-auto">{text}</p></div>
         </div>
     );
 }
@@ -40,9 +40,9 @@ function ContactForm() {
 export default function Contact() {
     return (
         <div>
-            <Title2 />
+            <Title2 name={'Contact'}/>
             <div className="grid grid-cols-2">
-                <div className="grid gap-3">
+                <div className="flex flex-col gap-2 self-center">
                     <ContactIcon text={'icon text'} />
                     <ContactIcon text={'icon text'} />
                     <ContactIcon text={'icon text'} />
