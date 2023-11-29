@@ -1,9 +1,12 @@
-import NavBar from './PortUser/PorfolioNavbar'
+import NavBar from './PortUser/PortfolioNavbar'
 import Hero from "./PortUser/PortfolioHero";
 import About from "./PortUser/PortfolioAbout";
 import Skills from "./PortUser/PortfolioSkills"
 import Projects from "./PortUser/PortfolioProjects"
 import Blogs from "./PortUser/PortfolioBlog"
+import Contact from './PortUser/PortfolioContact';
+import Footer from './PortMain/Footer';
+
 function Portfolio() {
     return (
         <div>
@@ -15,8 +18,10 @@ function Portfolio() {
                     <Skills />
                     <Projects />
                     <Blogs />
+                    <Contact />
                 </section>
             </div>
+                    <Footer />
         </div>
     )
 }
