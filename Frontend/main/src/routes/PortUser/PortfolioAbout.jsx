@@ -137,15 +137,17 @@ function Who() {
 
 export default function About() {
     return (
-        <div className="grid gap-20">
+        <div>
             <Title name={"About Me"} />
-            <div className="flex justify-center gap-10">
-                <Who />
-                <Expert />
-            </div>
-            <div className="flex justify-center gap-10">
-                <Education />
-                <Experience />
+            <div className="grid gap-20">
+                <div className="flex justify-center gap-10">
+                    <Who />
+                    <Expert />
+                </div>
+                <div className="flex justify-center gap-10">
+                    <Education />
+                    <Experience />
+                </div>
             </div>
         </div>
     )
