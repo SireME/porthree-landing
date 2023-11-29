@@ -31,8 +31,8 @@ function HeroTools() {
 function Hero() {
     return (
         <>
-            <div className="flex justify-between h-auto items-center pt-40 pb-20 border-b-4">
-                <div className="w-3/5 grid grid-cols-1 gap-10">
+            <div className="flex justify-between items-center pt-60 pb-20 border-b-4">
+                <div className="w-3/5 grid grid-cols-1 gap-20">
                     <div><p className="font-bold">Software Engineer</p></div>
                     <div><p className="font-bold text-5xl">Anadu Godwin</p></div>
                     <div><p className="font-medium">It is a long established fact that a
