@@ -23,6 +23,18 @@ router = routers.DefaultRouter()
 router.register(r'PothreeAbout', views.PorthreeAboutView, 'about')
 router.register(r'PothreeFAQ', views.PorthreeFAQView, 'FAQ')
 
+# register api urls
+router.register(r'users', views.UserViewSet)
+router.register(r'posttags', views.PostTagsViewSet)
+router.register(r'posts', views.PostViewSet)
+router.register(r'comments', views.CommentViewSet)
+router.register(r'skills', views.SkillViewSet)
+router.register(r'socials', views.SocialViewSet)
+router.register(r'heroes', views.HeroViewSet)
+router.register(r'themes', views.ThemeViewSet)
+router.register(r'projects', views.ProjectViewSet)
+router.register(r'projecttools', views.ProjectToolsViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
