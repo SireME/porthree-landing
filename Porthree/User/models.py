@@ -160,3 +160,18 @@ class ProjectTools(models.Model):
 
     def __str__(self):
         return f"Tool '{self.name}' for project by {self.user}"
+
+class ProjectSkills(models.Model):
+    """
+    this model defines the skills acquired through a
+    specific project
+    """
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
