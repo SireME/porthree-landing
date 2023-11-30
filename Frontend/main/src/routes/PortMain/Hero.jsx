@@ -214,7 +214,7 @@ function HeroLabel() {
 export default function Hero() {
     return(
         <div>
-        <div className='w=100 bg-gradient-to-r from-blue to-blue-900 grid grid-cols-2 mt-20 px-20 py-40 border border-r-8'>
+        <div className='bg-gradient-to-r from-blue to-blue-900 grid grid-cols-2 mt-20 px-20 py-40 border border-r-8'>
             <div className='grid gap-20'>
                 <div className='text-2xl font-medium'>
                     <span>
