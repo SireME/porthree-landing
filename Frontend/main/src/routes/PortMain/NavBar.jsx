@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Forms from './Forms'
+import Forms from './Login'
 // import './App.css'
 
 function Button({ buttonText, handle }) {
@@ -56,7 +56,7 @@ function NavBar() {
     return (
 
         <>
-            <div className='flex items-baseline justify-between align-center border-b px-20 py-4 fixed w-full bg-blue bg-opacity-50'>
+            <div className='flex flex-wrap items-baseline justify-between align-center border-b px-20 py-4 fixed w-full bg-blue bg-opacity-50'>
                 <Logo />
                 <NavLinks />
                 <NavSearch />

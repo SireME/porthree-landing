@@ -18,10 +18,22 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from main import views
+from User import views as userViews
 
 router = routers.DefaultRouter()
 router.register(r'PothreeAbout', views.PorthreeAboutView, 'about')
 router.register(r'PothreeFAQ', views.PorthreeFAQView, 'FAQ')
+
+router.register(r'User', userViews.UserView, 'User')
+router.register(r'PostTags', userViews.PostTagsView, 'PostTags')
+router.register(r'Post', userViews.PostView, 'Post')
+router.register(r'Comment', userViews.CommentView, 'Comment')
+router.register(r'Skill', userViews.SkillView, 'Skill')
+router.register(r'Social', userViews.SocialView, 'Social')
+router.register(r'Hero', userViews.HeroView, 'Hero')
+router.register(r'Theme', userViews.ThemeView, 'Theme')
+router.register(r'Project', userViews.ProjectView, 'Project')
+router.register(r'ProjectTools', userViews.ProjectToolsView, 'ProjectTools')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
