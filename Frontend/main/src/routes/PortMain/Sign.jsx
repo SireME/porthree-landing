@@ -79,11 +79,7 @@ export default function Forms2() {
     });
 
     const handleSubmit = (item) => {
-        axios.post("http://127.0.0.1:8000/api/User/", item)
-        .then(response => {
-            // Handle the response, if needed
-            console.log(response);
-        })
+        axios.post("http://127.0.0.1:8000/api/User/", item);
     };
 
 
