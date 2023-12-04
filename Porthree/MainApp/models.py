@@ -7,6 +7,32 @@ from django.db import models
 from django.core.validators import MaxValueValidator
 
 
+class UserDetails(models.Model):
+    """
+    This model represents a user details in the database
+    and user associated data
+    """
+
+    id = models.UUIDField(
+        primary_key=True, default=uuid4, editable=False, auto_created=True
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    email = models.EmailField(unique=True)
+    career_title = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = models.IntegerField(null=True, unique=True, blank=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    rating = models.IntegerField(
+        default=0, validators=[MaxValueValidator(5)], null=True, blank=True
+    )
+    about_me = models.TextField(null=True, blank=True)
+    resume = models.FileField(upload_to="static/resumes/", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class PostTags(models.Model):
     """
@@ -47,7 +73,7 @@ class Post(models.Model):
 
         Returns:
             _tuple_: a tuple containing post tags
-        """        
+        """
         return "\n".join([i.tags for i in self.tags.name()])
 
     def __str__(self):
@@ -185,6 +211,7 @@ class ProjectSkills(models.Model):
 
     def __str__(self):
         return str(self.name)
+
 
 class PorthreeAbout(models.Model):
     """Defines the PorthreeAbout model

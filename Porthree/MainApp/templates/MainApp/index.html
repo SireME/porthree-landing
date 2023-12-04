@@ -94,7 +94,7 @@ https://templatemo.com/tm-584-pod-talk
                     </ul>
 
                     <div class="ms-4">
-                        <a href="#section_3" class="btn custom-btn custom-border-btn smoothscroll">Get started</a>
+                        <a href="{% url 'signup' %}" class="btn custom-btn custom-border-btn smoothscroll">Sign-up</a>
                     </div>
                 </div>
             </div>
@@ -812,10 +812,10 @@ https://templatemo.com/tm-584-pod-talk
     </footer>
 
     <!-- JAVASCRIPT FILES -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="{% static 'MainApp/js/jquery.min.js' %}"></script>
+    <script src="{% static 'MainApp/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'MainApp/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'MainApp/js/custom.js' %}"></script>
 </body>
 
 </html>
