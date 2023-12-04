@@ -20,22 +20,13 @@
     </header>
 
     <main>
-        
-        {% if user.is_authenticated %}
-            <!-- Display content for authenticated users -->
-            <div id="dashboard">
-                <h2>Dashboard</h2>
-                <p>Content specific to authenticated users</p>
-                <a href="{% url 'user-details' %}">User Details</a>
-            </div>
-        {% else %}
-            <!-- Display content for non-authenticated users -->
-            <div id="full-width-content">
-                <h1>Welcome to Porthree</h1>
-                <p>Content for non-authenticated users</p>
-            </div>
-        {% endif %}
-
+        <!-- Your main content goes here -->
+        <h2>Enter and define Your Details</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create details</button>
+        </form>
     </main>
 
     <footer>
@@ -44,4 +35,3 @@
 
 </body>
 </html>
-
