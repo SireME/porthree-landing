@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/MainApp/css/styles.css">
-    <title>Your Website Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <header>
-        <h1>Porthree</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block title %}Signup - Porthree{% endblock %}
 
-    <main>
-        <!-- Your main content goes here -->
-        <h2>Enter and define Your Details</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create details</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Porthree. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+{% block content %}
+    <!-- Your page details content goes here -->
+    <h2>Enter and define Your Details</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create details</button>
+    </form>
+{% endblock %}

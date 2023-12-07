@@ -1,37 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/MainApp/css/styles.css">
-    <title>Your Website Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <header>
-        <h1>Porthree</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block title %}Login - Porthree{% endblock %}
 
-    <main>
-        <!-- Your main content goes here -->
-        <h2>Sign In</h2>
+{% block content %}
+    <!-- Your login page content goes here -->
+    <h2>Sign In</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Sign In</button>
         </form>
-    </main>
+{% endblock %}
 
-    <footer>
-        <p>&copy; 2023 Porthree. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>

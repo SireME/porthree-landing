@@ -13,3 +13,12 @@ urlpatterns = [
     path('user-details/', user_details_form, name='user-details'),
     path('user/<username>', portfolio, name='portfolio'),
 ]
+
+
+# the following settings are to ensuredjango serves files
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

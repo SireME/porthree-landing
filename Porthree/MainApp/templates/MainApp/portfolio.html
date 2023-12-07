@@ -1,47 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/MainApp/css/styles.css">
-    <title>Your Website Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <header>
-        <h1>Porthree</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block title %}Signup - Porthree{% endblock %}
 
-    <main>
-        
-        {% if user.is_authenticated %}
-            <!-- Display content for authenticated users -->
-            <div id="dashboard">
-                <h2>Dashboard</h2>
-                <p>Content specific to authenticated users</p>
-                <a href="{% url 'user-details' %}">User Details</a>
-            </div>
-        {% else %}
-            <!-- Display content for non-authenticated users -->
-            <div id="full-width-content">
-                <h1>Welcome to Porthree</h1>
-                <p>Content for non-authenticated users</p>
-            </div>
-        {% endif %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <!-- Display content for authenticated users -->
+        <div id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Content specific to authenticated users</p>
+            <a href="{% url 'user-details' %}">User Details</a>
+        </div>
+    {% else %}
+    <!-- Display content for non-authenticated users -->
+        <div id="full-width-content">
+            <h1>Welcome to Porthree</h1>
+            <p>Content for non-authenticated users</p>
+        </div>
+    {% endif %}
+{% endblock %}
 
-    </main>
 
-    <footer>
-        <p>&copy; 2023 Porthree. All rights reserved.</p>
-    </footer>
 
-</body>
-</html>
 
