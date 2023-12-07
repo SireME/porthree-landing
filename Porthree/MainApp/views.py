@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
 from .forms import UserDetailsForm
+from .models import UserDetails
 
 
 # Create your views here.
@@ -21,30 +22,25 @@ def index(request):
 
 @login_required
 def user_details_form(request):
-    """user_details_form view function
+    user = request.user
 
-    Args:
-        request (_object_): django http request
+    try:
+        # Check if data already exists for the current user
+        user_details = UserDetails.objects.get(user=user)
+    except UserDetails.DoesNotExist:
+        user_details = None
 
-    Returns:
-        _object_: interaction with template
-    """
-    if request.method == "POST":
-        form = UserDetailsForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        form = UserDetailsForm(request.POST, request.FILES, instance=user_details)
         if form.is_valid():
             user_details = form.save(commit=False)
-            user_details.user = (
-                request.user
-            )  # Assuming you have user authentication implemented
+            user_details.user = request.user
             user_details.save()
-            return redirect(
-                "portfolio", username=request.user.username
-            )  # Redirect to portfolio screen
+            return redirect('portfolio', username=request.user.username)
     else:
-        form = UserDetailsForm()
+        form = UserDetailsForm(instance=user_details)
 
     return render(request, "UserApp/dashboard.html", {"form": form})
-
 
 def signup(request):
     if request.method == "POST":

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from uuid import uuid4
 from django.db import models
 from django.core.validators import MaxValueValidator
+from django.utils.text import slugify
 
 
 class UserDetails(models.Model):
@@ -61,7 +62,8 @@ class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     tags = models.ManyToManyField(PostTags, related_name="posts")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    title = models.CharField(max_length=255, unique=True, null=False, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, null=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField(unique=True, null=True, blank=True)
@@ -75,6 +77,13 @@ class Post(models.Model):
             _tuple_: a tuple containing post tags
         """
         return "\n".join([i.tags for i in self.tags.name()])
+
+    def save(self, *args, **kwargs):
+        """convert a a title to slug
+        """
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.title)
@@ -171,11 +180,20 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    slug = models.SlugField(unique=True)
     about = models.TextField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     rating = models.IntegerField(
         default=0, validators=[MaxValueValidator(5)], null=True, blank=True
     )
+
+
+    def save(self, *args, **kwargs):
+        """convert a a title to slug
+        """
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Project by {self.user}"
