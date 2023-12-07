@@ -11,46 +11,11 @@ from .models import UserDetails
 class UserDetailsForm(forms.ModelForm):
     class Meta:
         model = UserDetails
-        fields = [
-            "email",
-            "first_name",
-            "last_name",
-            "career_title",
-            "phone_number",
-            "rating",
-            "about_me",
-            "resume",
-        ]
+        fields = ['email', 'first_name', 'last_name', 'career_title', 'phone_number', 'about_me', 'resume']
+        fields.append("profile_picture")
         widgets = {
-            "email": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter your email"}
-            ),
-            "first_name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter your First name"}
-            ),
-            "last_name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter your Last Name"}
-            ),  # Corrected
-            "career_title": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Enter your Career Title",
-                }
-            ),
-            "phone_number": forms.NumberInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Enter your Phone number",
-                }
-            ),
-            "about_me": forms.Textarea(
-                attrs={"class": "form-control", "placeholder": "About user here..."}
-            ),
-            "rating": forms.NumberInput(
-                attrs={"class": "form-control", "placeholder": "Rating"}
-            ),
+            'resume': forms.FileInput(attrs={'accept': 'application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
         }
-
 
 class SignUpForm(UserCreationForm):
     # Add custom fields if needed

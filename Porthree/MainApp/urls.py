@@ -20,3 +20,12 @@ urlpatterns = [
     path('resume/', resume, name='resume'),
     path('contact/', contact, name='contact'),
 ]
+
+
+# the following settings are to ensuredjango serves files
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

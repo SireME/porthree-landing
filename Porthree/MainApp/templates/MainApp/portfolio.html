@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup - Porthree{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <!-- Display content for authenticated users -->
+        <div id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Content specific to authenticated users</p>
+            <a href="{% url 'user-details' %}">User Details</a>
+        </div>
+    {% else %}
+    <!-- Display content for non-authenticated users -->
+        <div id="full-width-content">
+            <h1>Welcome to Porthree</h1>
+            <p>Content for non-authenticated users</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+
+

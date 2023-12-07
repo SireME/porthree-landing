@@ -25,11 +25,9 @@ class UserDetails(models.Model):
     phone_number = models.IntegerField(null=True, unique=True, blank=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    rating = models.IntegerField(
-        default=0, validators=[MaxValueValidator(5)], null=True, blank=True
-    )
     about_me = models.TextField(null=True, blank=True)
-    resume = models.FileField(upload_to="static/resumes/", null=True, blank=True)
+    resume = models.FileField(upload_to="resumes/", null=True, blank=True)
+    profile_picture = models.ImageField(upload_to="profile_pictures/", null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
