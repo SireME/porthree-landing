@@ -21,6 +21,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
+                        {%if user_details%}
                         <div class=" d-flex justify-content-between">
                             <div class=" w-75 d-flex flex-column justify-content-between">
                                 <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
@@ -48,12 +49,14 @@
                                     {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}</h2>
                             </div>
                         </div>
+                        {%endif%}
                     </div>
                     {%for project in projects%}
                     <div class="carousel-item">
                         <div class=" d-flex justify-content-between">
                             <div class=" w-75 d-flex flex-column justify-content-between">
-                                <h2 class="display-4 font-weight-bold justify-self-baseline text-primary">{{project.title}}</h2>
+                                <h2 class="display-4 font-weight-bold justify-self-baseline text-primary">
+                                    {{project.title}}</h2>
                                 <p class="font-bold h4 h-50 my-5 text-dark">{{project.about|truncatechars:255}}
                                 </p>
                                 <div class="d-flex my-2 mb-4 justify-content-between w-50">
@@ -65,7 +68,7 @@
                                         tool3</div>
                                 </div>
                                 <div>
-                                    <a href="" >Visit
+                                    <a href="">Visit
                                         project&rarr;</a>
                                 </div>
                             </div>
