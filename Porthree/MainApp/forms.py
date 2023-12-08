@@ -11,11 +11,30 @@ from .models import UserDetails
 class UserDetailsForm(forms.ModelForm):
     class Meta:
         model = UserDetails
-        fields = ['email', 'first_name', 'last_name', 'career_title', 'phone_number', 'about_me', 'resume']
+        fields = [
+            "email",
+            "first_name",
+            "last_name",
+            "career_title",
+            "phone_number",
+            "about_me",
+            "resume",
+        ]
         fields.append("profile_picture")
         widgets = {
-            'resume': forms.FileInput(attrs={'accept': 'application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
+            "resume": forms.FileInput(
+                attrs={
+                    "accept": "application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                }
+            ),
+            "email": forms.TextInput(attrs={"class": "form-control"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "career_title": forms.TextInput(attrs={"class": "form-control"}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "about_me": forms.Textarea(attrs={"class": "form-control"}),
         }
+
 
 class SignUpForm(UserCreationForm):
     # Add custom fields if needed
@@ -24,13 +43,13 @@ class SignUpForm(UserCreationForm):
         fields = ("username", "password1", "password2")
         widgets = {
             "username": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Enter your email"}
+                attrs={"class": "form-control", "placeholder": "Username"}
             ),
             "password1": forms.PasswordInput(
-                attrs={"class": "form-control", "placeholder": "Enter your First name"}
+                attrs={"class": "form-control", "placeholder": "Password"}
             ),
             "password2": forms.PasswordInput(
-                attrs={"class": "form-control", "placeholder": "Enter your First name"}
+                attrs={"class": "form-control", "placeholder": "Confirm Password"}
             ),
         }
 

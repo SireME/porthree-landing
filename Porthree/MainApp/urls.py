@@ -10,9 +10,9 @@ urlpatterns = [
     path("signup/", signup, name="signup"),
     path("login/", user_login, name="login"),
     path('logout/', user_logout, name='logout'),
-    path('user-details/', user_details_form, name='user-details'),
     path('user/<username>', portfolio, name='portfolio'),
-    # this parts are just for template dumy data display yet to be functional
+    path('user/<username>/user-details/', user_details_form, name='user-details'),
+    # this parts are just for template dummy data display yet to be functional
     path('blogs/', blog_home, name='blogs'),
     path('blog_post/', blog_post, name='blog_post'),
     path('projects/', projects, name='projects'),

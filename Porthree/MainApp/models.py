@@ -178,7 +178,7 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255, unique=True, null=True, blank=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
     about = models.TextField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     rating = models.IntegerField(
