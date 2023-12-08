@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from .models import UserDetails
+from .models import UserDetails, Skill, Project
 
 
 class UserDetailsForm(forms.ModelForm):
@@ -34,6 +34,18 @@ class UserDetailsForm(forms.ModelForm):
             "phone_number": forms.TextInput(attrs={"class": "form-control"}),
             "about_me": forms.Textarea(attrs={"class": "form-control"}),
         }
+
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ["name"]
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ["title", "about", "comment", "rating"]
 
 
 class SignUpForm(UserCreationForm):

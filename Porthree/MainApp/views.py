@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import UserDetailsForm
-from .models import UserDetails, Project
+from .forms import UserDetailsForm, ProjectForm
+from .models import UserDetails, Project, Skill
 
 
 # Create your views here.
@@ -37,11 +37,80 @@ def user_details_form(request, username):
             user_details = form.save(commit=False)
             user_details.user = request.user
             user_details.save()
-            return redirect("portfolio", username=request.user.username)
+            return redirect("user-details", username=request.user.username)
     else:
         form = UserDetailsForm(instance=user_details)
 
-    return render(request, "MainApp/dashboard1.html", {"form": form})
+    return render(request, "MainApp/user-details.html", {"form": form})
+
+
+@login_required
+def create_skill(request):
+    user = request.user
+
+    try:
+        # Check if data already exists for the current user
+        user_skills = Skill.objects.get(user=user)
+    except Skill.DoesNotExist:
+        user_skills = None
+
+    if request.method == "POST":
+        form = SkillForm(request.POST, instance=user_skills)
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.user = request.user  # associate user
+            skill.save()
+            return redirect("create-skills")  # Redirect to a success page
+    else:
+        form = SkillForm(instance=user_skills)
+
+    return render(request, "MainApp/create_skills_form.html", {"form": form})
+
+
+@login_required
+def create_project(request, project_id=None):
+    user = request.user
+    user_projects = Project.objects.filter(user=user)
+
+    if project_id:
+        # Editing an existing project
+        project = get_object_or_404(Project, id=project_id, user=user)
+
+        if request.method == "POST":
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect(
+                    "create-project"
+                )  # Redirect to page containing list and form
+        else:
+            form = ProjectForm(instance=project)
+
+    else:
+        # Creating a new project
+        project = Project(user=user)
+
+        if request.method == "POST":
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect(
+                    "create-project"
+                )  # Redirect to project list or another appropriate page
+        else:
+            form = ProjectForm()
+
+    projects = Project.objects.filter(user=user)  # Retrieve all projects for display
+
+    return render(
+        request,
+        "MainApp/create_project_form.html",
+        {"form": form, "projects": projects},
+    )
 
 
 def signup(request):
@@ -54,7 +123,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect(
-                "portfolio", username=request.user.username
+                "login",
             )  # redirect to user portfolio view
     else:
         form = SignUpForm()
@@ -68,7 +137,7 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
             return redirect(
-                "portfolio", username=request.user.username
+                "user-details", username=request.user.username
             )  # redirect to user portfolio view
     else:
         form = LoginForm()
@@ -97,11 +166,11 @@ def portfolio(request, username):
     except UserDetails.DoesNotExist:
         user_details = None
     try:
-        projects = Project.objects.select_related("user").filter(
-            user__username=username
-        )
+        projects = Project.objects.select_related("user").filter(user__username=username)
     except Project.DoesNotExist:
         projects = None
+    if user_details is None:
+        return redirect("user-details", request.user.username)
     context = {
         "user": request.user,
         "user_details": user_details,
