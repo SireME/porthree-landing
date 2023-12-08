@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import UserDetailsForm
-from .models import UserDetails
+from .forms import UserDetailsForm, SkillForm
+from .models import UserDetails, Skill
 
 # Create your views here.
 def index(request):
@@ -26,11 +26,33 @@ def user_details_form(request):
             user_details = form.save(commit=False)
             user_details.user = request.user
             user_details.save()
-            return redirect('portfolio', username=request.user.username)
+            return redirect('user-details')
     else:
         form = UserDetailsForm(instance=user_details)
 
     return render(request, 'MainApp/user_details_form.html', {'form': form})
+
+@login_required
+def create_skill(request):
+    user = request.user
+
+    try:
+        # Check if data already exists for the current user
+        user_skills = Skill.objects.get(user=user)
+    except Skill.DoesNotExist:
+        user_skills = None
+
+    if request.method == 'POST':
+        form = SkillForm(request.POST, instance = user_skills)
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.user = request.user  # associate user
+            skill.save()
+            return redirect('create-skills')  # Redirect to a success page
+    else:
+        form = SkillForm(instance = user_skills)
+
+    return render(request, 'MainApp/create_skills_form.html', {'form': form})
 
 def signup(request):
     if request.method == 'POST':
@@ -41,7 +63,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('portfolio', username=request.user.username)  # redirect to user portfolio view
+            return redirect('user-details')  # redirect to user portfolio view
     else:
         form = SignUpForm()
     return render(request, "MainApp/sign-up.html", {'form': form})
@@ -52,7 +74,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('portfolio', username=request.user.username)  # redirect to user portfolio view
+            return redirect('user-details')  # redirect to user portfolio view
     else:
         form = LoginForm()
     return render(request, 'MainApp/login.html', {'form': form})

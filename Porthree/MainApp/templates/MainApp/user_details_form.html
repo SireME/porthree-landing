@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 
-{% block title %}Signup - Porthree{% endblock %}
+{% block title %}User details - Porthree{% endblock %}
 
-{% block content %}
+{% block db-content %}
     <!-- Your page details content goes here -->
-    <h2>Enter and define Your Details</h2>
+    <h2>Enter or Update Your Details</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create details</button>
+        <button type="submit">Create/Update</button>
     </form>
 {% endblock %}

@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import UserDetails
-
+from .models import Skill
 
 class UserDetailsForm(forms.ModelForm):
     class Meta:
@@ -16,6 +16,11 @@ class UserDetailsForm(forms.ModelForm):
         widgets = {
             'resume': forms.FileInput(attrs={'accept': 'application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'}),
         }
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ['name']
 
 class SignUpForm(UserCreationForm):
     # Add custom fields if needed

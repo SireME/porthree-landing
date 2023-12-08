@@ -3,7 +3,7 @@
 from django.urls import path
 from .views import signup, user_login, user_logout, index
 from .views import portfolio
-from .views import user_details_form
+from .views import user_details_form, create_skill
 
 urlpatterns = [
     path("", index, name="index"),
@@ -11,6 +11,7 @@ urlpatterns = [
     path("login/", user_login, name="login"),
     path('logout/', user_logout, name='logout'),
     path('user-details/', user_details_form, name='user-details'),
+    path('create-skills/', create_skill, name='create-skills'),
     path('user/<username>', portfolio, name='portfolio'),
 ]
 
