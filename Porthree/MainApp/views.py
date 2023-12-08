@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import UserDetailsForm, SkillForm
-from .models import UserDetails, Skill
+from .forms import UserDetailsForm, SkillForm, ProjectForm
+from .models import UserDetails, Skill, Project
 
 # Create your views here.
 def index(request):
@@ -53,6 +53,43 @@ def create_skill(request):
         form = SkillForm(instance = user_skills)
 
     return render(request, 'MainApp/create_skills_form.html', {'form': form})
+
+@login_required
+def create_project(request, project_id=None):
+    user = request.user
+    user_projects = Project.objects.filter(user=user)
+
+    if project_id:
+        # Editing an existing project
+        project = get_object_or_404(Project, id=project_id, user=user)
+
+        if request.method == 'POST':
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect('create-project')  # Redirect to page containing list and form
+        else:
+            form = ProjectForm(instance=project)
+
+    else:
+        # Creating a new project
+        project = Project(user=user)
+
+        if request.method == 'POST':
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect('create-project')  # Redirect to project list or another appropriate page
+        else:
+            form = ProjectForm()
+
+    projects = Project.objects.filter(user=user)  # Retrieve all projects for display
+
+    return render(request, 'MainApp/create_project_form.html', {'form': form, 'projects': projects})
 
 def signup(request):
     if request.method == 'POST':
