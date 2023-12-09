@@ -3,7 +3,7 @@
 from django.urls import path
 from .views import signup, user_login, user_logout, index
 from .views import portfolio, blog_post, case_study
-from .views import user_details_form, blog_home, projects, resume, contact
+from .views import user_details_form, blog_home, projects, resume, contact, create_project
 
 urlpatterns = [
     path("", index, name="index"),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('user/<username>', portfolio, name='portfolio'),
     path('user/<username>/user-details/', user_details_form, name='user-details'),
+    path('user/<project_id>', create_project, name='create-project'),
     # this parts are just for template dummy data display yet to be functional
     path('blogs/', blog_home, name='blogs'),
     path('blog_post/', blog_post, name='blog_post'),

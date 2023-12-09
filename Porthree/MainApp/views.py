@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
@@ -23,6 +24,15 @@ def index(request):
 
 @login_required
 def user_details_form(request, username):
+    """user details dashboard view
+
+    Args:
+        request (_object_): django http request
+        username (_object_): user's username
+
+    Returns:
+        _object_: django template render
+    """
     user = request.user
 
     try:
@@ -103,14 +113,10 @@ def create_project(request, project_id=None):
                 )  # Redirect to project list or another appropriate page
         else:
             form = ProjectForm()
-
     projects = Project.objects.filter(user=user)  # Retrieve all projects for display
+    context = {"form": form, "projects": projects}
 
-    return render(
-        request,
-        "MainApp/create_project_form.html",
-        {"form": form, "projects": projects},
-    )
+    return render(request, "MainApp/create_project_form.html", context)
 
 
 def signup(request):
@@ -158,19 +164,22 @@ def user_logout(request):
 
 
 def portfolio(request, username):
+    # this class throws error if the user's userdetails query is empty
     """
     redirection method on login or signup containing portfolio
     """
     try:
-        user_details = get_object_or_404(UserDetails, user__username=username)
+        user = get_object_or_404(User, username=username)
+    except User.DoesNotExist:
+        user=None
+    try:
+        user_details = get_object_or_404(UserDetails, user=user)
     except UserDetails.DoesNotExist:
         user_details = None
     try:
-        projects = Project.objects.select_related("user").filter(user__username=username)
+        projects = Project.objects.filter(user=user)
     except Project.DoesNotExist:
         projects = None
-    if user_details is None:
-        return redirect("user-details", request.user.username)
     context = {
         "user": request.user,
         "user_details": user_details,
@@ -180,12 +189,15 @@ def portfolio(request, username):
 
 
 @login_required
-def portfolio_nav(request):
+def portfolio_nav(request, id):
     """
     redirection method on login or signup containing portfolio
     """
+    user = request.user
+    user_details = get_object_or_404(UserDetails, user=user)
     context = {
-        "user": request.user,
+        "user": user,
+        "user_details": user_details,
     }
     return render(request, "portfolio_nav.html", context)
 
@@ -194,8 +206,9 @@ def main_nav(request):
     """
     redirection method on login or signup containing portfolio
     """
+    user = request.user
     context = {
-        "user": request.user,
+        "user": user,
     }
     return render(request, "base.html", context)
 
