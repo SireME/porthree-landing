@@ -10,6 +10,7 @@ urlpatterns = [
     path("signup/", signup, name="signup"),
     path("login/", user_login, name="login"),
     path('logout/', user_logout, name='logout'),
+    path('user/<username>', portfolio, name='portfolio'),
     path('user-details/', user_details_form, name='user-details'),
     path('create-skills/', create_skill, name='create-skills'),
     path('create-project/', create_project, name='create-project'),

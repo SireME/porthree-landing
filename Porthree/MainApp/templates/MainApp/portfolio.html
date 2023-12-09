@@ -1,24 +1,36 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Signup - Porthree{% endblock %}
+{% block title %}Portfolio - {{ user_details.first_name }} {{ user_details.last_name }}{% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-    <!-- Display content for authenticated users -->
-        <div id="dashboard">
-            <h2>Dashboard</h2>
-            <p>Content specific to authenticated users</p>
-            <a href="{% url 'user-details' %}">User Details</a>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>{{ user_details.first_name }} {{ user_details.last_name }}</h2>
+                <p class="text-muted">{{ user_details.career_title }}</p>
+                <p>{{ user_details.about_me }}</p>
+
+                <h4>Contact Information</h4>
+                <p>Email: {{ user_details.email }}</p>
+                <p>Phone: {{ user_details.phone_number }}</p>
+                <p> Resume: <br>
+                    <a href="{{ user_details.resume.url }}"> DOWNLOAD </a>
+                </p>
+
+                <h4>Skills</h4>
+                <ul>
+                    {% for skill in user_skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Add any additional information you want to display -->
+
+            </div>
+            <div class="col-md-4">
+                <img src="{{ user_details.profile_picture.url }}" alt="{{ user_details.first_name }} {{ user_details.last_name }}" class="img-fluid rounded-circle">
+                <!-- You may want to add a button or link to view or download the resume -->
+            </div>
         </div>
-    {% else %}
-    <!-- Display content for non-authenticated users -->
-        <div id="full-width-content">
-            <h1>Welcome to Porthree</h1>
-            <p>Content for non-authenticated users</p>
-        </div>
-    {% endif %}
+    </div>
 {% endblock %}
-
-
-
-

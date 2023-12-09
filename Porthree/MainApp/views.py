@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
+from django.contrib.auth.models import User
 from .forms import UserDetailsForm, SkillForm, ProjectForm
 from .models import UserDetails, Skill, Project
 
@@ -124,5 +125,11 @@ def portfolio(request, username):
     """
     redirection method on login or signup containing portfolio
     """
-    user = request.user
-    return render(request, 'MainApp/portfolio.html', {"user": user})
+    user = get_object_or_404(User, username=username)
+    user_details = get_object_or_404(UserDetails, user=user)
+    user_skills = get_object_or_404(Skill, user=user).name.split(",")
+
+    context = {"user_details": user_details,
+                "user_skills": user_skills
+            }
+    return render(request, 'MainApp/portfolio.html', context)
