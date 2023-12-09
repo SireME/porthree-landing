@@ -48,6 +48,12 @@ class ProjectForm(forms.ModelForm):
         fields = ["title", "about", "comment", "rating"]
 
 
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ["title", "about", "comment", "rating"]
+
+
 class SignUpForm(UserCreationForm):
     # Add custom fields if needed
     class Meta:

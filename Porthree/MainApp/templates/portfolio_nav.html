@@ -63,7 +63,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User information:</h6>
-                        <a class="collapse-item" href="{% url 'user-details' user.username%}">user details </a>
+                        <a class="collapse-item" href="{% url 'user-details'%}">user details </a>
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{% url 'user-details' username=user.username%}">
+                                <a class="dropdown-item" href="{% url 'user-details' %}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

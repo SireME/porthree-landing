@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import UserDetailsForm, ProjectForm
+from .forms import UserDetailsForm, ProjectForm, SkillForm
 from .models import UserDetails, Project, Skill
 
 
@@ -23,16 +23,7 @@ def index(request):
 
 
 @login_required
-def user_details_form(request, username):
-    """user details dashboard view
-
-    Args:
-        request (_object_): django http request
-        username (_object_): user's username
-
-    Returns:
-        _object_: django template render
-    """
+def user_details_form(request):
     user = request.user
 
     try:
@@ -47,11 +38,15 @@ def user_details_form(request, username):
             user_details = form.save(commit=False)
             user_details.user = request.user
             user_details.save()
-            return redirect("user-details", username=request.user.username)
+            return redirect("user-details")
     else:
         form = UserDetailsForm(instance=user_details)
+    context = {
+        "form": form,
+        "user_details": user_details,
+    }
 
-    return render(request, "MainApp/user-details.html", {"form": form})
+    return render(request, "MainApp/user-details.html", context)
 
 
 @login_required
@@ -119,6 +114,59 @@ def create_project(request, project_id=None):
     return render(request, "MainApp/create_project_form.html", context)
 
 
+@login_required
+def create_project(request, project_id=None):
+    user = request.user
+    user_projects = Project.objects.filter(user=user)
+
+    # Handling project deletion
+    if request.method == "POST" and "delete_project" in request.POST:
+        project_id_to_delete = request.POST.get("delete_project")
+        project_to_delete = get_object_or_404(
+            Project, id=project_id_to_delete, user=user
+        )
+        project_to_delete.delete()
+        return redirect("create-project")  # Redirect to current page with deletion
+
+    if project_id:
+        # Editing an existing project
+        project = get_object_or_404(Project, id=project_id, user=user)
+
+        if request.method == "POST":
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect(
+                    "create-project"
+                )  # Redirect to page containing list and form
+        else:
+            form = ProjectForm(instance=project)
+
+    else:
+        # Creating a new project
+        project = Project(user=user)
+
+        if request.method == "POST":
+            form = ProjectForm(request.POST, instance=project)
+            if form.is_valid():
+                project = form.save(commit=False)
+                project.user = request.user
+                project.save()
+                return redirect("create-project")  # Redirect to project
+        else:
+            form = ProjectForm()
+
+    projects = Project.objects.filter(user=user)  # Retrieve all projects for display
+
+    return render(
+        request,
+        "MainApp/create_project_form.html",
+        {"form": form, "projects": projects},
+    )
+
+
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -171,7 +219,7 @@ def portfolio(request, username):
     try:
         user = get_object_or_404(User, username=username)
     except User.DoesNotExist:
-        user=None
+        user = None
     try:
         user_details = get_object_or_404(UserDetails, user=user)
     except UserDetails.DoesNotExist:

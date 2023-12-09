@@ -17,15 +17,14 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit User information</h6>
             </div>
             <div class="card-body">
-                <form method="post">
+                <div><img src="{{user_details.profile_picture.url}}"  alt="profile picture" class="w-25"></div>
+                <form method="post"  enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        {{form.profile_picture.label}}:
-                        {{form.profile_picture}}
+                        {{form.profile_picture.label}} {{form.profile_picture}}
                     </div>
                     <div class="form-group">
-                        {{form.resume.label}}:
-                        {{form.resume}}
+                        {{form.resume.label}} {{form.resume}}
                     </div>
                     <div class="form-group">
                         {{form.email.label}}
