@@ -60,6 +60,13 @@ def create_project(request, project_id=None):
     user = request.user
     user_projects = Project.objects.filter(user=user)
 
+    # Handling project deletion
+    if request.method == 'POST' and 'delete_project' in request.POST:
+        project_id_to_delete = request.POST.get('delete_project')
+        project_to_delete = get_object_or_404(Project, id=project_id_to_delete, user=user)
+        project_to_delete.delete()
+        return redirect('create-project')  # Redirect to current page with deletion
+
     if project_id:
         # Editing an existing project
         project = get_object_or_404(Project, id=project_id, user=user)
@@ -84,7 +91,7 @@ def create_project(request, project_id=None):
                 project = form.save(commit=False)
                 project.user = request.user
                 project.save()
-                return redirect('create-project')  # Redirect to project list or another appropriate page
+                return redirect('create-project')  # Redirect to project
         else:
             form = ProjectForm()
 

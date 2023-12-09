@@ -20,8 +20,14 @@
         <h2>Existing Projects</h2>
         <ul class="list-group">
           {% for project in projects %}
-            <li class="list-group-item">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
               <a href="{% url 'edit-project' project.id %}">{{ project.title }}</a>
+               <!-- Delete button for each project -->
+            <form method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="hidden" name="delete_project" value="{{ project.id }}">
+              <button type="submit" class="btn btn-danger btn-sm ml-2" onclick="return confirm('Are you sure you want to delete this project?')">Delete</button>
+            </form>
             </li>
           {% endfor %}
         </ul>
