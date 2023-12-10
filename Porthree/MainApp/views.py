@@ -195,7 +195,7 @@ def portfolio(request, username):
     except Skill.DoesNotExist:
         skills = None
     context = {
-        "user": request.user,
+        "user": user,
         "user_details": user_details,
         "projects": projects,
         "skills": skills,

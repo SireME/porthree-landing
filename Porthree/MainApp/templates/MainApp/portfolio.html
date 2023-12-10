@@ -3,6 +3,26 @@
 
 {% block title %}{{user_details.user}} - Porthree{% endblock %}
 
+{% block nav %}
+<div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="{%url 'portfolio' user %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">Portfolios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">Contact</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+
 {% block content %}
 
 <!-- Hero Section -->
@@ -31,7 +51,8 @@
                                         <div class="d-flex flex-wrap mx-1 px-2">
                                             <div class="card border-left-info shadow h-100 px-2">
                                                 <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto" style="padding-left: 10px;">
+                                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
+                                                        style="padding-left: 10px;">
                                                         {{skill}}
                                                     </div>
                                                 </div>
