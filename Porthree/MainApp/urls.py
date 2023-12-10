@@ -33,7 +33,7 @@ urlpatterns = [
 ]
 
 
-# the following settings are to ensuredjango serves files
+# the following settings are to ensured django serves files
 
 from django.conf import settings
 from django.conf.urls.static import static

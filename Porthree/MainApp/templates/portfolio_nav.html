@@ -135,6 +135,12 @@
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bold text-dark" href="#">Contact</a>
                             </li>
+                            <li class="nav-item">
+                                <a type="button" class="nav-link font-weight-bold text-dark" data-toggle="modal"
+                                    data-target="#exampleModalLong">
+                                    resume
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -304,7 +310,8 @@
                                 {%if user_details.profile_picture%}
                                 <img class="img-profile rounded-circle" src="{{user_details.profile_picture.url}}">
                                 {%else%}
-                                <img class="img-profile rounded-circle" src="{% static 'MainApp/img/undraw_profile.svg' %}">
+                                <img class="img-profile rounded-circle"
+                                    src="{% static 'MainApp/img/undraw_profile.svg' %}">
                                 {%endif%}
                             </a>
                             <!-- Dropdown - User Information -->
@@ -333,80 +340,113 @@
                     </ul>
                     {%else%}
                     <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
-            </div>
+                    {%endif%}
+                </nav>
+                <!-- End of Topbar -->
 
-            {%endif%}
-
-
-            </nav>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
 
-                {% block content %}{% endblock %}
-
-
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Porthree {% now "Y" %} </span>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        {{user_details.first_name}}_{{user_details.last_name}} resume</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if user_details.resume %}
+                                    <embed src="{{ user_details.resume.url }}" type="application" width="100%">
+                                    <p>Not showing?<a href="{{ user_details.resume.url }}" target="_blank"
+                                            rel="noopener noreferrer">Open in
+                                            browser</a></p>
+                                    {% else %}
+                                    <p>No resume available.</p>
+                                    {% endif %}
+                                </div>
+                                <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+                            </div>
                         </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+
+
+                    {% block content %}{% endblock %}
+
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Porthree {% now "Y" %} </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current
-                        session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current
+                    session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{% static 'MainApp/vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'MainApp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'MainApp/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'MainApp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="{% static 'MainApp/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'MainApp/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="{% static 'MainApp/js/sb-admin-2.min.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'MainApp/js/sb-admin-2.min.js' %}"></script>
 
-        <!-- Page level plugins -->
-        <script src="{% static 'MainApp/vendor/chart.js/Chart.min.js' %}"></script>
+    <!-- Page level plugins -->
+    <script src="{% static 'MainApp/vendor/chart.js/Chart.min.js' %}"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="{% static 'MainApp/js/demo/chart-area-demo.js' %}"></script>
-        <script src="{% static 'MainApp/js/demo/chart-pie-demo.js' %}"></script>
+    <!-- Page level custom scripts -->
+    <script src="{% static 'MainApp/js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'MainApp/js/demo/chart-pie-demo.js' %}"></script>
 
 </body>
 

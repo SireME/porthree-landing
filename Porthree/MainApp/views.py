@@ -191,7 +191,10 @@ def portfolio(request, username):
         projects = None
     try:
         value = Skill.objects.filter(user=user)
-        skills =  value[0].name.split(", ")
+        if value:
+            skills =  value[0].name.split(", ")
+        else:
+            skills = None
     except Skill.DoesNotExist:
         skills = None
     context = {
