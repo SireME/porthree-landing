@@ -69,6 +69,9 @@ class SignUpForm(UserCreationForm):
             "username": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Username"}
             ),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "example@gmail.com"}
+            ),
             "password1": forms.PasswordInput(
                 attrs={"class": "form-control", "placeholder": "Password"}
             ),
