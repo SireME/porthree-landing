@@ -40,6 +40,11 @@ class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
         fields = ["name"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Skills here"}
+            ),
+        }
 
 
 class ProjectForm(forms.ModelForm):

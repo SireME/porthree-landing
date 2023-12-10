@@ -17,7 +17,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit User information</h6>
             </div>
             <div class="card-body">
-                <div><img src="{{user_details.profile_picture.url}}"  alt="profile picture" class="w-25"></div>
+                <div class="pb-5"><img src="{{user_details.profile_picture.url}}"  alt="profile picture" class="w-25 rounded mx-auto d-block"></div>
                 <form method="post"  enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">

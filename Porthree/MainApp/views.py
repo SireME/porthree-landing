@@ -69,49 +69,12 @@ def create_skill(request):
     else:
         form = SkillForm(instance=user_skills)
 
-    return render(request, "MainApp/create_skills_form.html", {"form": form})
+    context = {
+        "form": form,
+        "user_skills": user_skills,
+    }
 
-
-@login_required
-def create_project(request, project_id=None):
-    user = request.user
-    user_projects = Project.objects.filter(user=user)
-
-    if project_id:
-        # Editing an existing project
-        project = get_object_or_404(Project, id=project_id, user=user)
-
-        if request.method == "POST":
-            form = ProjectForm(request.POST, instance=project)
-            if form.is_valid():
-                project = form.save(commit=False)
-                project.user = request.user
-                project.save()
-                return redirect(
-                    "create-project"
-                )  # Redirect to page containing list and form
-        else:
-            form = ProjectForm(instance=project)
-
-    else:
-        # Creating a new project
-        project = Project(user=user)
-
-        if request.method == "POST":
-            form = ProjectForm(request.POST, instance=project)
-            if form.is_valid():
-                project = form.save(commit=False)
-                project.user = request.user
-                project.save()
-                return redirect(
-                    "create-project"
-                )  # Redirect to project list or another appropriate page
-        else:
-            form = ProjectForm()
-    projects = Project.objects.filter(user=user)  # Retrieve all projects for display
-    context = {"form": form, "projects": projects}
-
-    return render(request, "MainApp/create_project_form.html", context)
+    return render(request, "MainApp/create-skills.html", context)
 
 
 @login_required
@@ -160,11 +123,8 @@ def create_project(request, project_id=None):
 
     projects = Project.objects.filter(user=user)  # Retrieve all projects for display
 
-    return render(
-        request,
-        "MainApp/create_project_form.html",
-        {"form": form, "projects": projects},
-    )
+    context = {"form": form, "projects": projects}
+    return render(request, "MainApp/create-project.html", context)
 
 
 def signup(request):
@@ -190,9 +150,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect(
-                "user-details", username=request.user.username
-            )  # redirect to user portfolio view
+            return redirect("user-details")  # redirect to user portfolio view
     else:
         form = LoginForm()
     return render(request, "MainApp/login.html", {"form": form})
