@@ -190,8 +190,8 @@ def portfolio(request, username):
     except Project.DoesNotExist:
         projects = None
     try:
-        skills  = get_object_or_404(Skill, user=user).name.split(",")
-        # skills =  [value.name.split(", ")]
+        skills_query = Skill.objects.filter(user=user)
+        skills = skills_query[0].name.split(",") if skills_query else None
     except Skill.DoesNotExist:
         skills = None
     context = {
