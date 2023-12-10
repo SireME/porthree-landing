@@ -189,10 +189,16 @@ def portfolio(request, username):
         projects = Project.objects.filter(user=user)
     except Project.DoesNotExist:
         projects = None
+    try:
+        skills  = get_object_or_404(Skill, user=user).name.split(",")
+        # skills =  [value.name.split(", ")]
+    except Skill.DoesNotExist:
+        skills = None
     context = {
         "user": request.user,
         "user_details": user_details,
         "projects": projects,
+        "skills": skills,
     }
     return render(request, "MainApp/portfolio.html", context)
 
