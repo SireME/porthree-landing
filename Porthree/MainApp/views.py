@@ -38,15 +38,19 @@ def user_details_form(request):
             user_details = form.save(commit=False)
             user_details.user = request.user
             user_details.save()
-            return redirect("user-details")
+            user.email = user_details.email
+            user.save() # update user instance email
+            return redirect('user-details')
     else:
-        form = UserDetailsForm(instance=user_details)
+        email = user.email if user.email != "" else user_details.email
+        form = UserDetailsForm(instance=user_details, initial={'email': email})
     context = {
         "form": form,
         "user_details": user_details,
     }
 
     return render(request, "MainApp/user-details.html", context)
+
 
 
 @login_required
@@ -80,7 +84,6 @@ def create_skill(request):
 @login_required
 def create_project(request, project_id=None):
     user = request.user
-    user_projects = Project.objects.filter(user=user)
 
     # Handling project deletion
     if request.method == "POST" and "delete_project" in request.POST:
