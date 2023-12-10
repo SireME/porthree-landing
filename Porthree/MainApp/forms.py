@@ -31,7 +31,7 @@ class SignUpForm(UserCreationForm):
     # Add custom fields if needed
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
 
 class LoginForm(AuthenticationForm):
     pass
