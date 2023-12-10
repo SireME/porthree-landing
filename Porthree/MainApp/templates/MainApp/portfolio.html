@@ -109,20 +109,22 @@
                 <div class="container d-flex flex-column" style="gap: 10px;">
                     <div class="text-bold font-weight-bold text-success">User: {{user.username}}</div>
                     <div class="text-bold font-weight-bold text-info">Created: {{project.created_at}} </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="dropdown show w-50">
+                            <a class="btn btn-success dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tools
+                            </a>
 
-                    <div class="dropdown show">
-                        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tools
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                         </div>
+                        <a rel="nofollow" href="https://undraw.co/">See project &rarr;</a>
                     </div>
-                    <a rel="nofollow" href="https://undraw.co/">See project &rarr;</a>
+
                 </div>
             </div>
         </div>
