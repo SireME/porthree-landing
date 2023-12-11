@@ -38,8 +38,3 @@ Porthree is not just a portfolio management platform; it's an embodiment of our 
 
 ## ©2023 Porthree 3
 
-© 2023 Porthree - All Rights Reserved
-
-**Color Switcher**
-These are just demo colors. You can easily create your own color scheme.
-
