@@ -207,7 +207,7 @@ def portfolio(request, username):
 
 
 @login_required
-def portfolio_nav(request, id):
+def portfolio_nav(request):
     """
     redirection method on login or signup containing portfolio
     """

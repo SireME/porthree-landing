@@ -52,68 +52,66 @@
 </div>
 
 <!-- Hero Section -->
-<div class="container mb-4">
+<div class="jumbotron bg-light">
 
     <!-- Content Row -->
-    <div class="container" style="height: 75vh;">
-        <div class="card shadow mb-4 p-4  border border-primary h-100 d-flex">
-            <!-- Hero slider/ carousel -->
-            <div class="conatiner-fluid d-flex justify-content-between">
-                {%if user_details%}
-                <div class="" style="width: 70%;">
-                    <div class=" w-60">
-                        <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
-                            {{user_details.first_name}} {{user_details.last_name}}</h2>
-                        <h3 class=" font-weight-bold justify-self-baseline text-primary text-danger">
-                            {{user_details.career_title}}</h3>
-                        <p class="font-bold h4 h-50 my-4 text-dark">
-                            {{user_details.about_me|truncatechars:255}}
-                        </p>
-                        <div class="d-flex my-2 mb-4 justify-content-between w-50">
-                            {%for skill in skills|slice:":5"%}
-                            <!-- tool item -->
-                            <div class="d-flex flex-wrap mx-1 px-2">
-                                <div class="card border-left-info shadow h-100 px-2">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
-                                            style="padding-left: 10px;">
-                                            {{skill}}
-                                        </div>
+    <div class="card o-hidden border-0 shadow-lg  mb-4 p-4 h-100 d-flex">
+        <!-- Hero slider/ carousel -->
+        <div class="conatiner-fluid d-flex justify-content-between">
+            {%if user_details%}
+            <div class="" style="width: 70%;">
+                <div class=" w-60">
+                    <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
+                        {{user_details.first_name}} {{user_details.last_name}}</h2>
+                    <h3 class=" font-weight-bold justify-self-baseline text-primary text-danger">
+                        {{user_details.career_title}}</h3>
+                    <p class="font-bold h4 h-50 my-4 text-dark">
+                        {{user_details.about_me|truncatechars:255}}
+                    </p>
+                    <div class="d-flex my-2 mb-4 justify-content-between w-50">
+                        {%for skill in skills|slice:":5"%}
+                        <!-- tool item -->
+                        <div class="d-flex flex-wrap mx-1 px-2">
+                            <div class="card border-left-info shadow h-100 px-2">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
+                                        style="padding-left: 10px;">
+                                        {{skill}}
                                     </div>
                                 </div>
                             </div>
-                            {%endfor%}
                         </div>
-                        <div>
-                            <a href="">About <b>{{user_details.first_name}} {{user_details.last_name}}</b>
-                                &rarr;</a>
-                        </div>
+                        {%endfor%}
+                    </div>
+                    <div>
+                        <a href="">About <b>{{user_details.first_name}} {{user_details.last_name}}</b>
+                            &rarr;</a>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-between">
-                    {%if user_details.profile_picture%}
-                    <div class="card border border-primary p-1" type="button" data-toggle="modal"
-                        data-target="#heroportfolio"><img class="rounded " src="{{user_details.profile_picture.url}}"
-                            style="max-width: 220px; max-height: 220px;" alt="">
-                    </div>
-                    {%else%}
-                    <h2 class="font-weight-bold display-1 m-auto capitalise">
-                        {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}
-                    </h2>
-                    {%endif%}
-                    <div class="card">
-                        <ul class="list-group">
-                            {%if user_details.phone_number%}
-                            <li class="list-group-item">{{user_details.phone_number}}</li>
-                            {%endif%}
-                            {%if user_details.email%}
-                            <li class="list-group-item">{{user_details.email}}</li>
-                            {%endif%}
-                        </ul>
-                    </div>
-                </div>
-                {%endif%}
             </div>
+            <div class="d-flex flex-column justify-content-between">
+                {%if user_details.profile_picture%}
+                <div class="card o-hidden  shadow-lg  border border-primary p-1" type="button" data-toggle="modal"
+                    data-target="#heroportfolio"><img class="rounded " src="{{user_details.profile_picture.url}}"
+                        style="max-width: 220px; max-height: 220px;" alt="">
+                </div>
+                {%else%}
+                <h2 class="font-weight-bold display-1 m-auto capitalise">
+                    {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}
+                </h2>
+                {%endif%}
+                <div class="card">
+                    <ul class="list-group">
+                        {%if user_details.phone_number%}
+                        <li class="list-group-item">{{user_details.phone_number}}</li>
+                        {%endif%}
+                        {%if user_details.email%}
+                        <li class="list-group-item">{{user_details.email}}</li>
+                        {%endif%}
+                    </ul>
+                </div>
+            </div>
+            {%endif%}
         </div>
     </div>
 </div>
@@ -156,11 +154,11 @@
             Featured Projects</h1>
 
     </div>
-    <!--  -->
+    <!-- project cards container  -->
     <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
         <!-- project card -->
         {%for project in projects|slice:":3" %}
-        <div class="card shadow mb-4 border border-danger shadow h-100" style="width: 28%;">
+        <div class="card o-hidden border-0 shadow-lg  mb-4  h-100" style="width: 28%;">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">{{project.title|truncatechars:40}}</h6>
             </div>
@@ -188,7 +186,7 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <a rel="nofollow" href="https://undraw.co/">See project &rarr;</a>
+                        <a href="https://undraw.co/" rel="nofollow">See project &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -196,7 +194,7 @@
         {%endfor%}
     </div>
     <div class="text-primary d-flex justify-content-end">
-        <a rel="nofollow" href="https://undraw.co/"></a>See All Projects &rarr;</a>
+        <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
     </div>
 </div>
 
@@ -212,7 +210,7 @@
     <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
         <!-- project card -->
         {%for project in projects|slice:":3" %}
-        <div class="card shadow mb-4 border border-danger shadow h-100" style="width: 28%;">
+        <div class="card o-hidden border-0 shadow-lg  mb-4  h-100" style="width: 28%;">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">{{project.title|truncatechars:40}}</h6>
             </div>
@@ -247,7 +245,7 @@
         {%endfor%}
     </div>
     <div class="text-primary d-flex justify-content-end">
-        <a rel="nofollow" href="https://undraw.co/"></a>See All Projects &rarr;</a>
+        <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
     </div>
 </div>
 
