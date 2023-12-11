@@ -17,6 +17,11 @@
                             <h1 class="h4 text-gray-900 mb-4">Create a Porthree Account!</h1>
                         </div>
                         <form class="user" method="post">
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.errors }}
+                            </div>
+                            {% endif %}
                             {% csrf_token %}
                             <!-- <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">

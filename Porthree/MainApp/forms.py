@@ -51,26 +51,32 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ["title", "about", "comment", "rating"]
-
-
-class ProjectForm(forms.ModelForm):
-    class Meta:
-        model = Project
-        fields = ["title", "about", "comment", "rating"]
+        widgets = {
+            "title": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Project title here"}
+            ),
+            "about": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Write about project..."}
+            ),
+        }
 
 
 class SignUpForm(UserCreationForm):
     # Add custom fields if needed
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ("username", "email", "password1", "password2")
 
         widgets = {
             "username": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Username"}
             ),
             "email": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "example@gmail.com"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "example@gmail.com",
+                    "required": "required",
+                }
             ),
             "password1": forms.PasswordInput(
                 attrs={"class": "form-control", "placeholder": "Password"}

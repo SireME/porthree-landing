@@ -22,6 +22,11 @@
                                 </div>
                                 <form class="user" method="post">
                                     {% csrf_token %}
+                                    {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.errors }}
+                                    </div>
+                                    {% endif %}
                                     <p>{{form.errors.all}}</p>
                                     <div class="form-group">
                                         <label class="">{{form.username.label}}
