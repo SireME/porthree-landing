@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import UserDetailsForm, ProjectForm, SkillForm
-from .models import UserDetails, Project, Skill
+from .forms import UserDetailsForm, ProjectForm, SkillForm, PostForm
+from .models import UserDetails, Project, Skill, Post
 
 
 # Create your views here.
@@ -99,7 +99,7 @@ def create_project(request, project_id=None):
         project = get_object_or_404(Project, id=project_id, user=user)
 
         if request.method == "POST":
-            form = ProjectForm(request.POST, instance=project)
+            form = ProjectForm(request.POST, request.FILES, instance=project)
             if form.is_valid():
                 project = form.save(commit=False)
                 project.user = request.user
@@ -115,7 +115,7 @@ def create_project(request, project_id=None):
         project = Project(user=user)
 
         if request.method == "POST":
-            form = ProjectForm(request.POST, instance=project)
+            form = ProjectForm(request.POST, request.FILES, instance=project)
             if form.is_valid():
                 project = form.save(commit=False)
                 project.user = request.user
@@ -129,6 +129,49 @@ def create_project(request, project_id=None):
     context = {"form": form, "projects": projects}
     return render(request, "MainApp/create-project.html", context)
 
+@login_required
+def create_post(request, post_id=None):
+    user = request.user
+
+    # Handling post deletion
+    if request.method == "POST" and "delete_post" in request.POST:
+        post_id_to_delete = request.POST.get("delete_post")
+        post_to_delete = get_object_or_404(Post, id=post_id_to_delete, user=user)
+        post_to_delete.delete()
+        return redirect("create-post")  # Redirect to current page with deletion
+
+    if post_id:
+        # Editing an existing post
+        post = get_object_or_404(Post, id=post_id, user=user)
+
+        if request.method == "POST":
+            form = PostForm(request.POST, request.FILES, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.save()
+                return redirect("create-post")  # Redirect to page containing list and form
+        else:
+            form = PostForm(instance=post)
+
+    else:
+        # Creating a new post
+        post = Post(user=user)
+
+        if request.method == "POST":
+            form = PostForm(request.POST, request.FILES, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.save()
+                return redirect("create-post")  # Redirect to post
+        else:
+            form = PostForm()
+
+    posts = Post.objects.filter(user=user)  # Retrieve all posts for display
+
+    context = {"form": form, "posts": posts}
+    return render(request, "MainApp/create-post.html", context)
 
 def signup(request):
     if request.method == "POST":
