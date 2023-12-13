@@ -7,7 +7,7 @@
 <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link font-weight-bold text-dark" href="{%url 'portfolio' user %}">Home</a>
+            <a class="nav-link font-weight-bold text-dark" href="{%url 'portfolio' user%}">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link font-weight-bold text-dark" href="#">About</a>
@@ -18,6 +18,12 @@
         <li class="nav-item">
             <a class="nav-link font-weight-bold text-dark" href="#">Contact</a>
         </li>
+        <li class="nav-item">
+            <a type="button" class="nav-link font-weight-bold text-dark" data-toggle="modal"
+                data-target="#exampleModalLong">
+                resume
+            </a>
+        </li>
     </ul>
 </div>
 {% endblock %}
@@ -25,60 +31,119 @@
 
 {% block content %}
 
-<!-- Hero Section -->
-<div class="container mb-4">
 
-    <!-- Content Row -->
-    <div class="container" style="height: 75vh;">
-        <div class="card shadow mb-4 p-4  border border-primary h-100 d-flex">
-            <!-- Hero slider/ carousel -->
-            <div id="carouselExampleIndicators" class="carousel slide m-auto" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        {%if user_details%}
-                        <div class=" d-flex justify-content-between">
-                            <div class=" w-75 d-flex flex-column justify-content-between">
-                                <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
-                                    {{user_details.first_name}} {{user_details.last_name}}</h2>
-                                <h3 class=" font-weight-bold justify-self-baseline text-primary text-danger">
-                                    {{user_details.career_title}}</h2>
-                                    <p class="font-bold h4 h-50 my-4 text-dark">
-                                        {{user_details.about_me|truncatechars:255}}
-                                    </p>
-                                    <div class="d-flex my-2 mb-4 justify-content-between w-50">
-                                        {%for skill in skills|slice:":5"%}
-                                        <!-- tool item -->
-                                        <div class="d-flex flex-wrap mx-1 px-2">
-                                            <div class="card border-left-info shadow h-100 px-2">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
-                                                        style="padding-left: 10px;">
-                                                        {{skill}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {%endfor%}
-                                    </div>
-                                    <div>
-                                        <a href="">About <b>{{user_details.first_name}} {{user_details.last_name}}</b>
-                                            &rarr;</a>
-                                    </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <h2 class="font-weight-bold display-1 m-auto capitalise">
-                                    {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}</h2>
-                            </div>
-                        </div>
-                        {%endif%}
-                    </div>
-                </div>
+<!-- user image Modal -->
+<div class="modal fade" id="heroportfolio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% if user_details.profile_picture %}
+                <img src="{{user_details.profile_picture.url}}" width="100%">
+                {% endif %}
             </div>
         </div>
     </div>
-
 </div>
 
+<!-- Hero Section -->
+<div class="jumbotron bg-light">
+
+    <!-- Content Row -->
+    <div class="card o-hidden border-0 shadow-lg  mb-4 p-4 h-100 d-flex">
+        <!-- Hero slider/ carousel -->
+        <div class="conatiner-fluid d-flex justify-content-between">
+            {%if user_details%}
+            <div class="" style="width: 70%;">
+                <div class=" w-60">
+                    <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
+                        {{user_details.first_name}} {{user_details.last_name}}</h2>
+                    <h3 class=" font-weight-bold justify-self-baseline text-primary text-danger">
+                        {{user_details.career_title}}</h3>
+                    <p class="font-bold h4 h-50 my-4 text-dark">
+                        {{user_details.about_me|truncatechars:255}}
+                    </p>
+                    <div class="d-flex my-2 mb-4 justify-content-between w-50">
+                        {%for skill in skills|slice:":5"%}
+                        <!-- tool item -->
+                        <div class="d-flex flex-wrap mx-1 px-2">
+                            <div class="card border-left-info shadow h-100 px-2">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
+                                        style="padding-left: 10px;">
+                                        {{skill}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <div>
+                        <a href="">About <b>{{user_details.first_name}} {{user_details.last_name}}</b>
+                            &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-between">
+                {%if user_details.profile_picture%}
+                <div class="card o-hidden  shadow-lg  border border-primary p-1" type="button" data-toggle="modal"
+                    data-target="#heroportfolio"><img class="rounded " src="{{user_details.profile_picture.url}}"
+                        style="max-width: 220px; max-height: 220px;" alt="">
+                </div>
+                {%else%}
+                <h2 class="font-weight-bold display-1 m-auto capitalise">
+                    {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}
+                </h2>
+                {%endif%}
+                <div class="card">
+                    <ul class="list-group">
+                        {%if user_details.phone_number%}
+                        <li class="list-group-item">{{user_details.phone_number}}</li>
+                        {%endif%}
+                        {%if user_details.email%}
+                        <li class="list-group-item">{{user_details.email}}</li>
+                        {%endif%}
+                    </ul>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+
+<!-- resume Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    {{user_details.first_name}}_{{user_details.last_name}} resume</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% if user_details.resume %}
+                <embed src="{{ user_details.resume.url }}" width="100%">
+                <p>Not showing?<a href="{{ user_details.resume.url }}" target="_blank" rel="noopener noreferrer">Open in
+                        browser</a></p>
+                {% else %}
+                <p>No resume available.</p>
+                {% endif %}
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
 
 
 <!-- projects section -->
@@ -89,11 +154,11 @@
             Featured Projects</h1>
 
     </div>
-    <!--  -->
+    <!-- project cards container  -->
     <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
         <!-- project card -->
         {%for project in projects|slice:":3" %}
-        <div class="card shadow mb-4 border border-danger shadow h-100" style="width: 28%;">
+        <div class="card o-hidden border-0 shadow-lg  mb-4  h-100" style="width: 28%;">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">{{project.title|truncatechars:40}}</h6>
             </div>
@@ -109,27 +174,27 @@
                 <div class="container d-flex flex-column" style="gap: 10px;">
                     <div class="text-bold font-weight-bold text-success">User: {{user.username}}</div>
                     <div class="text-bold font-weight-bold text-info">Created: {{project.created_at}} </div>
-
-                    <div class="dropdown show">
-                        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tools
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="dropdown show">
+                            <a class="btn btn-success dropdown-toggle w-100" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tools
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                         </div>
+                        <a href="https://undraw.co/" rel="nofollow">See project &rarr;</a>
                     </div>
-                    <a rel="nofollow" href="https://undraw.co/">See project &rarr;</a>
                 </div>
             </div>
         </div>
         {%endfor%}
     </div>
     <div class="text-primary d-flex justify-content-end">
-        <a rel="nofollow" href="https://undraw.co/"></a>See All Projects &rarr;</a>
+        <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
     </div>
 </div>
 
@@ -145,7 +210,7 @@
     <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
         <!-- project card -->
         {%for project in projects|slice:":3" %}
-        <div class="card shadow mb-4 border border-danger shadow h-100" style="width: 28%;">
+        <div class="card o-hidden border-0 shadow-lg  mb-4  h-100" style="width: 28%;">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">{{project.title|truncatechars:40}}</h6>
             </div>
@@ -180,7 +245,7 @@
         {%endfor%}
     </div>
     <div class="text-primary d-flex justify-content-end">
-        <a rel="nofollow" href="https://undraw.co/"></a>See All Projects &rarr;</a>
+        <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
     </div>
 </div>
 

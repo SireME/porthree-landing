@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from .models import UserDetails, Skill, Project
+from .models import UserDetails, Skill, Project, Post
 
 
 class UserDetailsForm(forms.ModelForm):
@@ -53,10 +53,14 @@ class ProjectForm(forms.ModelForm):
         fields = ["title", "about", "comment", "rating"]
 
 
-class ProjectForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
-        model = Project
-        fields = ["title", "about", "comment", "rating"]
+        model = Post
+        fields = ['title', 'post_image', 'content']
+
+    widgets = {
+        'content': forms.Textarea(attrs={'class': 'ckeditor'}),
+    }
 
 
 class SignUpForm(UserCreationForm):

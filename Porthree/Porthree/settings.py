@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'MainApp.apps.MainappConfig',
+    'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -135,6 +137,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ckeditor configs
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+# ckeditor configs
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': '500',
+        'width': '100%',
+    },
+}
+
 
 # store all media files
 MEDIA_URL = '/media/'

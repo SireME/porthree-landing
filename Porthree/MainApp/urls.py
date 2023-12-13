@@ -11,6 +11,7 @@ from .views import (
     contact,
     create_project,
     create_skill,
+    create_post,
 )
 
 urlpatterns = [
@@ -23,6 +24,8 @@ urlpatterns = [
     path("create-skills/", create_skill, name="create-skills"),
     path("create-project/", create_project, name="create-project"),
     path("edit-project/<uuid:project_id>/", create_project, name="edit-project"),
+    path("create-post/", create_post, name="create-post"),
+    path("edit-post/<uuid:post_id>/", create_post, name="edit-post"),
     # this parts are just for template dummy data display yet to be functional
     path("blogs/", blog_home, name="blogs"),
     path("blog_post/", blog_post, name="blog_post"),
@@ -33,7 +36,7 @@ urlpatterns = [
 ]
 
 
-# the following settings are to ensuredjango serves files
+# the following settings are to ensured django serves files
 
 from django.conf import settings
 from django.conf.urls.static import static
