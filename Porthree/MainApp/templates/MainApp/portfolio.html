@@ -51,70 +51,43 @@
     </div>
 </div>
 
-<!-- Hero Section -->
-<div class="jumbotron bg-light">
+<!-- hero section -->
+<div class="jumbotron">
+    <div class="row">
+        {%if user_details%}
 
-    <!-- Content Row -->
-    <div class="card o-hidden border-0 shadow-lg  mb-4 p-4 h-100 d-flex">
-        <!-- Hero slider/ carousel -->
-        <div class="conatiner-fluid d-flex justify-content-between">
-            {%if user_details%}
-            <div class="" style="width: 70%;">
-                <div class=" w-60">
-                    <h2 class="display-4 font-weight-bold justify-self-baseline text-primary text-primary">
-                        {{user_details.first_name}} {{user_details.last_name}}</h2>
-                    <h3 class=" font-weight-bold justify-self-baseline text-primary text-danger">
-                        {{user_details.career_title}}</h3>
-                    <p class="font-bold h4 h-50 my-4 text-dark">
-                        {{user_details.about_me|truncatechars:255}}
-                    </p>
-                    <div class="d-flex my-2 mb-4 justify-content-between w-50">
-                        {%for skill in skills|slice:":5"%}
-                        <!-- tool item -->
-                        <div class="d-flex flex-wrap mx-1 px-2">
-                            <div class="card border-left-info shadow h-100 px-2">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2 h5 font-weight-bold text-gray-800 m-auto"
-                                        style="padding-left: 10px;">
-                                        {{skill}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {%endfor%}
-                    </div>
-                    <div>
-                        <a href="">About <b>{{user_details.first_name}} {{user_details.last_name}}</b>
-                            &rarr;</a>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex flex-column justify-content-between">
-                {%if user_details.profile_picture%}
-                <div class="card o-hidden  shadow-lg  border border-primary p-1" type="button" data-toggle="modal"
-                    data-target="#heroportfolio"><img class="rounded " src="{{user_details.profile_picture.url}}"
-                        style="max-width: 220px; max-height: 220px;" alt="">
-                </div>
-                {%else%}
-                <h2 class="font-weight-bold display-1 m-auto capitalise">
-                    {{user_details.first_name|slice:":1"}}{{user_details.last_name|slice:":1"}}
-                </h2>
+        <div class="col-8">
+            <h2 class="">{{user_details.career_title}}</h2>
+            <h1 class="display-4 font-weight-bold">{{user_details.first_name}} {{user_details.last_name}}</h1>
+            <p class="lead">{{user_details.about_me|truncatechars:255}}</p>
+            <ul class="d-flex flex-wrap">
+                {%if user_details.phone_number%}
+                <div class="mr-5 text-dark"><span class="font-weight-bold text-gray">Phone:</span> {{user_details.phone_number}}</div>
                 {%endif%}
-                <div class="card">
-                    <ul class="list-group">
-                        {%if user_details.phone_number%}
-                        <li class="list-group-item">{{user_details.phone_number}}</li>
-                        {%endif%}
-                        {%if user_details.email%}
-                        <li class="list-group-item">{{user_details.email}}</li>
-                        {%endif%}
-                    </ul>
-                </div>
-            </div>
-            {%endif%}
+                {%if user_details.email%}
+                <div class="mr-5 text-dark"><span class="font-weight-bold text-gray">Email:</span> {{user_details.email}}</div>
+                {%endif%}
+            </ul>
+            <hr class="my-4">
+            <p><span class="font-weight-bold">Skills:</span> {%for skill in skills|slice:":5"%}
+                {{skill}} |
+                {%endfor%}
+            </p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
         </div>
+        <div class="col-4">
+            <div class="img-fluid w-100 h-100 border" style="background-image: url({{user_details.profile_picture.url}});
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;" type="button" data-toggle="modal" data-target="#heroportfolio"></div>
+        </div>
+        {%endif%}
+
     </div>
 </div>
+<!-- end of hero section -->
 
 <!-- resume Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
