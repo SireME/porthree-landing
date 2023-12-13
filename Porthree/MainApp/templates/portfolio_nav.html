@@ -51,40 +51,33 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                User tools
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>User</span>
+                <a class="nav-link collapsed py-1 pl-4" href="{% url 'user-details'%}" 
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <span>User Details</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">User information:</h6>
-                        <a class="collapse-item" href="{% url 'user-details'%}">user details </a>
-                        <a class="collapse-item" href="{% url 'create-skills' %}">user Skills </a>
-                    </div>
-                </div>
+                <a class="nav-link collapsed py-1 pl-4" href="{% url 'create-skills'%}" 
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <span>User Skills</span>
+                </a>
             </li>
-
+            <div class="sidebar-heading">
+                Porthree
+            </div>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed py-1 pl-4" href="{% url 'create-project' %}" 
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Portfolio</span>
+                    <span>Project</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Portfolio Information:</h6>
-                        <a class="collapse-item" href="{% url 'create-project' %}">user Projects </a>
-                        <a class="collapse-item" href="{% url 'create-project' %}">user Projects </a>
-                    </div>
-                </div>
+                <a class="nav-link collapsed py-1 pl-4" href="{% url 'create-project' %}" 
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <span>Project</span>
+                </a>
             </li>
 
             <!-- Divider -->
