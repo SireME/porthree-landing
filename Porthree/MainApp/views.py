@@ -173,6 +173,15 @@ def create_post(request, post_id=None):
     context = {"form": form, "posts": posts}
     return render(request, "MainApp/create-post.html", context)
 
+def post_detail(request, slug):
+    """
+    this view manages the displsy of dpecific post content
+    """
+    post = get_object_or_404(Post, slug=slug)
+    user = request.user
+    context = {'post': post, 'user': user}
+    return render(request, 'MainApp/post_detail.html', context)
+
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
