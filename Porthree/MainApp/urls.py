@@ -12,6 +12,7 @@ from .views import (
     create_project,
     create_skill,
     create_post,
+    post_detail,
 )
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path("edit-project/<uuid:project_id>/", create_project, name="edit-project"),
     path("create-post/", create_post, name="create-post"),
     path("edit-post/<uuid:post_id>/", create_post, name="edit-post"),
+    path('posts/<slug:slug>/', post_detail, name='post-detail'),
     # this parts are just for template dummy data display yet to be functional
     path("blogs/", blog_home, name="blogs"),
     path("blog_post/", blog_post, name="blog_post"),
