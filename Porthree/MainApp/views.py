@@ -175,7 +175,7 @@ def create_post(request, post_id=None):
 
 def post_detail(request, slug):
     """
-    this view manages the displsy of dpecific post content
+    this view manages the display of dpecific post content
     """
     post = get_object_or_404(Post, slug=slug)
     user = request.user
@@ -242,6 +242,10 @@ def portfolio(request, username):
     except Project.DoesNotExist:
         projects = None
     try:
+        posts = Post.objects.filter(user=user)
+    except Post.DoesNotExist:
+        posts = None
+    try:
         value = Skill.objects.filter(user=user)
         if value:
             skills =  value[0].name.split(", ")
@@ -253,6 +257,7 @@ def portfolio(request, username):
         "user": request.user,
         "user_details": user_details,
         "projects": projects,
+        "posts": posts,
         "skills": skills,
     }
     return render(request, "MainApp/portfolio.html", context)

@@ -23,6 +23,12 @@
     <link rel="shortcut icon" href="{% static 'MainApp/img/favicon.png' %}" type="image/x-icon">
 
 </head>
+<style>
+    ::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+</style>
 
 <body id="page-top">
 
@@ -371,7 +377,9 @@
                             </div>
                         </div>
                     </div>
-                    {% block content %}{% endblock %}
+                    <div class="" style="overflow-y: scroll; height: 90vh">
+                        {% block content %}{% endblock %}
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
