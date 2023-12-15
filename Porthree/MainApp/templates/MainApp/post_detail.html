@@ -41,8 +41,6 @@
                 <div class="d-flex flex-wrap justify-content-between w-75">
                     <p>Posted by: {{ post.user }}</p>
                     <p>Created at: {{ post.created_at|date:"SHORT_DATE_FORMAT" }}</p>
-
-
                 </div>
                 <div class="pr-3">
                     {{ post.content|safe }}

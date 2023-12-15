@@ -17,14 +17,12 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit User information</h6>
             </div>
             <div class="card-body">
-
                 <div class="pb-5">
                     <!-- Ensure image is set only if availabel -->
                     {% if user_details and user_details.profile_picture and user_details.profile_picture.url %}
                         <img src="{{ user_details.profile_picture.url }}" alt="profile picture" class="w-25 rounded mx-auto d-block">
                     {% endif %}
                 </div>
-                
                 <form method="post"  enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
