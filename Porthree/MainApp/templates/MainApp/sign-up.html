@@ -6,7 +6,7 @@
 <!-- Your signup content goes here -->
 <div class="container">
 
-    <div class="card o-hidden border-0 shadow-lg my-5 w-50 m-auto">
+    <div class="card o-hidden border-0 shadow-lg my-5 w-50 m-auto"  style="min-width: 400px;">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row ">
@@ -39,13 +39,13 @@
                             <div class="form-group">
                                 {{form.email}}
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="form-group d-flex flex-wrap justify-content-center" style="gap: 2px;">
+                                <div class="col">
                                     {{ form.password1.label }}
                                     {{ form.password1 }}
 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col">
                                     {{ form.password2.label }}
                                     {{ form.password2 }}
                                 </div>
