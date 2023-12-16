@@ -67,9 +67,8 @@
 </div>
 
 <div class="row">
-
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7 post-container" style="overflow-y: scroll; height:135vh;">
+    <div class="col-xl-8 col-lg-7 post-container" style="overflow-y: scroll; max-height:135vh;">
         <div class="card shadow mb-4">
             <div class="car-title text-center">
                 {% if post.post_image %}
@@ -89,7 +88,6 @@
                     {{ post.content|safe }}
                 </div>
             </div>
-
         </div>
     </div>
 
