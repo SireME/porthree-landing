@@ -57,11 +57,13 @@
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'user-details'%}" style="width: 85%;">
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'user-details'%}"
+                        style="width: 85%;">
                         <span>User Details</span>
                     </a>
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-skills'%}" style="width: 85%;">
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-skills'%}"
+                        style="width: 85%;">
                         <span>User Skills</span>
                     </a>
                 </li>
@@ -71,11 +73,13 @@
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-project' %}" style="width: 85%;">
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-project' %}"
+                        style="width: 85%;">
                         <span>Project</span>
                     </a>
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-post' %}" style="width: 85%;">
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-post' %}"
+                        style="width: 85%;">
                         <span>Post</span>
                     </a>
                 </li>
@@ -132,7 +136,7 @@
                                         <a class="nav-link font-weight-bold text-dark" href="#">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link font-weight-bold text-dark" href="#">Portfolios</a>
+                                        <a class="nav-link font-weight-bold text-dark" href="#">Projects</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link font-weight-bold text-dark" href="#">Contact</a>
@@ -140,7 +144,7 @@
                                     <li class="nav-item">
                                         <a type="button" class="nav-link font-weight-bold text-dark" data-toggle="modal"
                                             data-target="#exampleModalLong">
-                                            resume
+                                            CV
                                         </a>
                                     </li>
                                 </ul>
@@ -231,7 +235,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">
-                                        {{user_details.first_name}}_{{user_details.last_name}} resume</h5>
+                                        {{user_details.first_name}}_{{user_details.last_name}} CV</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -243,7 +247,7 @@
                                             rel="noopener noreferrer">Open in
                                             browser</a></p>
                                     {% else %}
-                                    <p>No resume available.</p>
+                                    <p>{{user_details.user}} currently don't have a CV ono Porthree.</p>
                                     {% endif %}
                                 </div>
                                 <!-- <div class="modal-footer">
@@ -253,7 +257,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="padding-top: 100px;">
+                    <div style="padding-top: 100px;padding-bottom: 100px;">
                         {% block content %}{% endblock %}
                     </div>
                 </div>

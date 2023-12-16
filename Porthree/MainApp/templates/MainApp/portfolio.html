@@ -22,7 +22,7 @@
         <li class="nav-item">
             <a type="button" class="nav-link font-weight-bold text-dark" data-toggle="modal"
                 data-target="#exampleModalLong">
-                resume
+                CV
             </a>
         </li>
     </ul>
@@ -81,9 +81,9 @@
         </div>
     </div>
     <hr class="my-4">
-    <p><span class="font-weight-bold">Skills:</span> {%for skill in skills|slice:":5"%}
+    <p><span class="font-weight-bold">Skills:</span> {%for skill in skills|slice:":7"%}
         {{skill}} |
-        {%endfor%}
+        {%endfor%}...
     </p>
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
@@ -123,11 +123,12 @@
 
 
 <!-- projects section -->
-<div class="col">
+<div class="col mt-5">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
-        <h1 class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold">
-            Featured Projects</h1>
+        <h1
+            class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold text-capitalize">
+            {{user_details.user}}'s Projects</h1>
 
     </div>
     <!-- project cards container  -->
@@ -200,14 +201,196 @@
     </div>
 </div>
 
-
-<!-- Posts section -->
-<div class="col">
+<!-- Resume section -->
+<div class="conatiner mt-5">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
-        <h1 class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold">
-            Featured Posts</h1>
-
+        <h1
+            class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold text-capitalize">
+            {{user_details.user}}'s resume</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Color System -->
+            <div class="card-title h4 font-weight-bold">Education</div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-primary text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Primary
+                            </span>
+                            <div class="text-white-50 small">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia, recusandae?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-success text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Success
+                            </span>
+                            <div class="text-white-50 small">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio, atque quod exercitationem dolore saepe minus! Voluptate, quo! Enim, ratione aperiam.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-info text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Info
+                            </span>
+                            <div class="text-white-50 small">#36b9cc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-warning text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Warning
+                            </span>
+                            <div class="text-white-50 small">#f6c23e</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-danger text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Danger
+                            </span>
+                            <div class="text-white-50 small">#e74a3b</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-secondary text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Secondary
+                            </span>
+                            <div class="text-white-50 small">#858796</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Light
+                            </span>
+                            <div class="text-black-50 small">#f8f9fc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-dark text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Dark
+                            </span>
+                            <div class="text-white-50 small">#5a5c69</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Color System -->
+            <div class="card-title h4 font-weight-bold">Experience</div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-primary text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Primary
+                            </span>
+                            <div class="text-white-50 small">#4e73df</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-success text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Success
+                            </span>
+                            <div class="text-white-50 small">#1cc88a</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-info text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Info
+                            </span>
+                            <div class="text-white-50 small">#36b9cc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-warning text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Warning
+                            </span>
+                            <div class="text-white-50 small">#f6c23e</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-danger text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Danger
+                            </span>
+                            <div class="text-white-50 small">#e74a3b</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-secondary text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Secondary
+                            </span>
+                            <div class="text-white-50 small">#858796</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Light
+                            </span>
+                            <div class="text-black-50 small">#f8f9fc</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-dark text-white shadow">
+                        <div class="card-body">
+                            <span class="text-capitalize">
+                                Dark
+                            </span>
+                            <div class="text-white-50 small">#5a5c69</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Posts section -->
+<div class="col mt-5">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
+        <h1
+            class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold text-capitalize">
+            {{user_details.user}}'s Posts</h1>
     </div>
     <!--  -->
     <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
@@ -263,23 +446,60 @@
 </div>
 
 <!-- contact section -->
-<div class="container-fluid">
+<div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-7">
+        <div class="col-7 justify-content-center">
             <!-- section Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-5">
                 <h1
                     class="mb-auto text-gray-800 mb-primary h2 border-bottom border-primary pr-5 font-weight-bold text-capitalize">
                     {{user_details.user}}'s Contact</h1>
             </div>
-            <div class="d-flex border justify-content-center">
-                <ul class="list-group">
-                    <li class="list-group-item">{{user_details.email}}</li>
-                    <li class="list-group-item">{{user_details.phone_number}}</li>
-                </ul>
+            <!-- Color System -->
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            Email
+                            <div class="text-black-50 small">{{user_details.email}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            Phone
+                            <div class="text-black-50 small">{{user_details.phone_number}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            Linkedin
+                            <div class="text-black-50 small">user.linkedin</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            tweeter (X)
+                            <div class="text-black-50 small">user.x</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-light text-black shadow">
+                        <div class="card-body">
+                            Github
+                            <div class="text-black-50 small">user.github</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card col-5">
+        <div class="card col-md-5 py-2 h-100">
             <form>
                 <div class="form-group">
                     <label for="inputAddress">Name</label>
@@ -295,7 +515,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Message</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
