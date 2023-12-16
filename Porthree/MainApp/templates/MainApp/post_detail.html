@@ -4,13 +4,38 @@
 
 {% block title %}{{ post.title }} - {{ user.username }} posts - Porthree{% endblock %}
 
+{% block nav %}
+<div class="d-sm-inline-block form-inline navbar-search m-lg-auto" style="width: fit-content;">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="{%url 'portfolio' post.user%}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">Portfolios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="#">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a type="button" class="nav-link font-weight-bold text-dark" data-toggle="modal"
+                data-target="#exampleModalLong">
+                resume
+            </a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="container mb-5">
-<style>
-    img{
-        width: 100%;
-    }
-</style>
+    <style>
+        img {
+            width: 100%;
+        }
+    </style>
     <!-- Back to Posts link -->
     {% if user.is_authenticated %}
     <!-- Link to create-post endpoint -->

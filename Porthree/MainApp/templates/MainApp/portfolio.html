@@ -5,7 +5,7 @@
 {% block title %}{{user_details.user}} - Porthree{% endblock %}
 
 {% block nav %}
-<div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+<div class="d-sm-inline-block form-inline navbar-search m-lg-auto" style="width: fit-content;">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <a class="nav-link font-weight-bold text-dark" href="{%url 'portfolio' user_details.user%}">Home</a>
@@ -54,10 +54,10 @@
 
 <!-- hero section -->
 <div class="jumbotron">
-    <div class="row">
-        {%if user_details%}
+    {%if user_details%}
+    <div class="row justify-content-center">
 
-        <div class="col-8">
+        <div class="col-md-auto col-lg-7">
             <h2 class="">{{user_details.career_title}}</h2>
             <h1 class="display-4 font-weight-bold">{{user_details.first_name}} {{user_details.last_name}}</h1>
             <p class="lead">{{user_details.about_me|truncatechars:255}}</p>
@@ -71,24 +71,24 @@
                     {{user_details.email}}</div>
                 {%endif%}
             </ul>
-            <hr class="my-4">
-            <p><span class="font-weight-bold">Skills:</span> {%for skill in skills|slice:":5"%}
-                {{skill}} |
-                {%endfor%}
-            </p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
+
         </div>
-        <div class="col-4">
-            <div class="img-fluid w-100 h-100 border" style="background-image: url({{user_details.profile_picture.url}});
+        <div class="col col-lg-5 col-md">
+            <div class="img-fluid w-100 h-100 border" style="background-image: url({{user_details.profile_picture.url}}); min-height: 300px; min-width:250px;
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;" type="button" data-toggle="modal" data-target="#heroportfolio"></div>
         </div>
-        {%endif%}
-
     </div>
+    <hr class="my-4">
+    <p><span class="font-weight-bold">Skills:</span> {%for skill in skills|slice:":5"%}
+        {{skill}} |
+        {%endfor%}
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+    {%endif%}
 </div>
 <!-- end of hero section -->
 
