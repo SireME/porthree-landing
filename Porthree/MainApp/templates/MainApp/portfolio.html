@@ -136,14 +136,12 @@
         {%for project in projects|slice:":3" %}
         <div class="card shadow-lg  mb-4 h-100" style="width: 350px;">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary text-center">{{project.title|truncatechars:40}}</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-center text-capitalize">{{project.title|truncatechars:40}}</h6>
             </div>
             <div class="card-body p-0 pb-3">
                 <div class="text-center w-100 border"
                     style="background: url('../../static/MainApp/img/undraw_posting_photo.svg'); height: 200px;background-repeat: no-repeat;background-size: 100%;">
                 </div>
-                <!-- <div class="dropdown-divider"></div> -->
-
                 <div class="container d-flex flex-column p-2" style="gap: 10px;">
                     <div class="text-bold font-weight-bold text-success">User: {{user.username}}</div>
                     <div class="text-bold font-weight-bold text-info">Posted: {{project.created_at| naturaltime}} ago
@@ -165,8 +163,33 @@
                 <div class="dropdown-divider"></div>
                 <p class="p-2">{{project.about|truncatechars:200}}</p>
                 <div class="dropdown-divider"></div>
-                <a href="https://undraw.co/" rel="nofollow" class="p-2">See project &rarr;</a>
+                <a href="#" type="button" data-toggle="modal" data-target="#project{{ project.id }}" class="p-2">See
+                    project &rarr;</a>
+            </div>
+        </div>
 
+        <!-- projects modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="project{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="projectTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-capitalize" id="projectTitle">{{project.title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{project.about}}
+                    </div>
+                    <div class="modal-footer">
+                        {%if user.is_authenticated%}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        {%endif%}
+                    </div>
+                </div>
             </div>
         </div>
         {%endfor%}
@@ -175,6 +198,7 @@
         <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
     </div>
 </div>
+
 
 <!-- Posts section -->
 <div class="col">
@@ -190,7 +214,7 @@
         {%for post in posts|slice:":3" %}
         <div class="card shadow-lg  mb-4 h-100" style="width: 350px;">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary text-center">{{post.title|truncatechars:40}}</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-center text-capitalize">{{post.title|truncatechars:40}}</h6>
             </div>
             <div class="card-body p-0 pb-3">
                 {%if post.post_image%}

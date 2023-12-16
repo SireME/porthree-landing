@@ -77,7 +77,7 @@
                     style="background-image: url('{{ post.post_image.url }}'); max-height: 300px;">
                 </div>
                 {% endif %}
-                <h1 class="h1 font-weight-bold text-dark">{{ post.title }}</h1>
+                <h1 class="h1 font-weight-bold text-dark text-capitalize">{{ post.title }}</h1>
             </div>
             <!-- Card Header - Dropdown -->
             <div class="p-3 card-body">
@@ -94,17 +94,17 @@
     </div>
 
     <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
+    <div class="col-xl-4 col-lg-5 col-lg-auto">
         <!-- portfolio card -->
         <a href="">
             <div class="card shadow-lg py-3 border border-primary m-3" style="width: 300px;">
-                <div class=" d-flex justify-content-center mb-3 ">
+                <div class=" d-flex justify-content-center mb-3 h-100">
                     {%if user_details.profile_picture%}
-                    <img src="{{user_details.profile_picture.url}}" width="150" height="150" class="rounded-circle"
+                    <img src="{{user_details.profile_picture.url}}" width="150" height="150" class="rounded"
                         alt="User profile image">
                     {%else%}
                     <img src="{% static 'MainApp/img/undraw_posting_photo.svg' %}" width="150" height="150"
-                        class="rounded-circle" alt="User profile image">
+                        class="rounded" alt="User profile image">
                     {%endif%}
                 </div>
                 <div class="container">
