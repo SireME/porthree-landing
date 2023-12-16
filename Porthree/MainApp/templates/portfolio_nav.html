@@ -23,6 +23,7 @@
     <link rel="shortcut icon" href="{% static 'MainApp/img/favicon.png' %}" type="image/x-icon">
 
 </head>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -30,61 +31,62 @@
 
         <!-- Sidebar hidden for now to be visible to only login in admins -->
         {%if user.is_authenticated%}
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion pr-5" id="accordionSidebar">
+            <div class="position-fixed">
+                <!-- Sidebar - Brand -->
 
-            <!-- Sidebar - Brand -->
 
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="{%url 'user-details' %}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="{%url 'user-details' %}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    User tools
+                </div>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                User tools
-            </div>
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'user-details'%}" style="width: 85%;">
+                        <span>User Details</span>
+                    </a>
+                    <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-skills'%}" style="width: 85%;">
+                        <span>User Skills</span>
+                    </a>
+                </li>
+                <div class="sidebar-heading">
+                    Porthree
+                </div>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-project' %}" style="width: 85%;">
+                        <span>Project</span>
+                    </a>
+                    <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
+                        role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-post' %}" style="width: 85%;">
+                        <span>Post</span>
+                    </a>
+                </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                    role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'user-details'%}">
-                    <span>User Details</span>
-                </a>
-                <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                    role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-skills'%}">
-                    <span>User Skills</span>
-                </a>
-            </li>
-            <div class="sidebar-heading">
-                Porthree
-            </div>
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                    role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-project' %}">
-                    <span>Project</span>
-                </a>
-                <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
-                    role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-post' %}">
-                    <span>Post</span>
-                </a>
-            </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
             </div>
         </ul>
         {%endif%}
@@ -97,7 +99,8 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand-lg navbar-light bg-white topbar shadow fixed-top" style=" z-index: 99;">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white topbar shadow fixed-top"
+                    style=" z-index: 99;">
                     <!-- navbar logo -->
                     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{%url 'index' %}">
 

@@ -35,6 +35,24 @@
         img {
             width: 100%;
         }
+
+        .post-container::-webkit-scrollbar {
+            width: 7px;
+            /* width of the entire scrollbar */
+        }
+
+        .post-container::-webkit-scrollbar-track {
+            background: #4E73DF;
+            border-radius: 4px;
+            /* color of the tracking area */
+        }
+
+        .post-container::-webkit-scrollbar-thumb {
+            background-color: #fff;
+            /* color of the scroll thumb */
+            border-radius: 2px;
+            /* roundness of the scroll thumb */
+        }
     </style>
     <!-- Back to Posts link -->
     {% if user.is_authenticated %}
@@ -51,12 +69,12 @@
 <div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-8 col-lg-7 post-container" style="overflow-y: scroll; height:135vh;">
         <div class="card shadow mb-4">
             <div class="car-title text-center">
                 {% if post.post_image %}
                 <div class="post-image rounded-top"
-                    style="background-image: url('{{ post.post_image.url }}'); height: 300px;">
+                    style="background-image: url('{{ post.post_image.url }}'); max-height: 300px;">
                 </div>
                 {% endif %}
                 <h1 class="h1 font-weight-bold text-dark">{{ post.title }}</h1>
