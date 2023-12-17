@@ -150,6 +150,29 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+# email configurations for google account
+
+# Use the SMTP backend for sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Gmail SMTP settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Use 465 for SSL
+EMAIL_USE_TLS = True  # Or use EMAIL_USE_SSL = True for SSL
+
+# Your Gmail account credentials
+EMAIL_HOST_USER = 'porthreemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yufj cild bjzf wihm'
+
+# Default "from" address for emails sent by Django
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+SERVER_EMAIL = 'webmaster@localhost'
+
+
+# authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # store all media files
 MEDIA_URL = "/media/"
