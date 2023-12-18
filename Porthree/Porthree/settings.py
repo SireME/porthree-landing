@@ -28,6 +28,10 @@ DEBUG = True
 # deployment configs
 ALLOWED_HOSTS = ['porthree.up.railway.app']
 
+# ensure trusted origins
+CSRF_TRUSTED_ORIGINS = ['https://porthree.up.railway.app']
+
+
 
 
 # Application definition
