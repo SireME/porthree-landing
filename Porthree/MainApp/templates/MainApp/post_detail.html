@@ -78,16 +78,16 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center; background-blend-mode: multiply;">
-                <h1 class="h1 font-weight-bold text-capitalize align-self-center text-light">{{ post.title }}</h1>
+                <h1 class="h1 font-weight-bold text-capitalize align-self-center text-light">{{ post.title|safe }}</h1>
                 </div>
                 {% else %}
-                <h1 class="h1 font-weight-bold text-dark text-capitalize">{{ post.title }}</h1>
+                <h1 class="h1 font-weight-bold text-dark text-capitalize">{{ post.title|safe }}</h1>
                 {% endif %}
             </div>
             <!-- Card Header - Dropdown -->
             <div class="p-3 card-body">
                 <div class="d-flex flex-wrap justify-content-between w-75">
-                    <p>Post by: {{ post.user }}</p>
+                    <p>Post by: {{ post.user|safe }}</p>
                     <p>Posted on: {{ post.created_at|date:"SHORT_DATE_FORMAT" }}</p>
                 </div>
                 <div class="pr-3">

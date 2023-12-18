@@ -61,17 +61,18 @@
         <div class="row justify-content-center">
 
             <div class="col-md-auto col-lg-7">
-                <h2 class="">{{user_details.career_title}}</h2>
-                <h1 class="display-4 font-weight-bold">{{user_details.first_name}} {{user_details.last_name}}</h1>
-                <p class="lead">{{user_details.about_me|truncatechars:255}}</p>
+                <h2 class="">{{user_details.career_title|safe}}</h2>
+                <h1 class="display-4 font-weight-bold">{{user_details.first_name|safe}} {{user_details.last_name|safe}}
+                </h1>
+                <p class="lead">{{user_details.about_me|safe|truncatechars:255}}</p>
                 <ul class="d-flex flex-wrap">
                     {%if user_details.phone_number%}
                     <div class="mr-5 text-dark"><span class="font-weight-bold text-gray">Phone:</span>
-                        {{user_details.phone_number}}</div>
+                        {{user_details.phone_number|safe}}</div>
                     {%endif%}
                     {%if user_details.email%}
                     <div class="mr-5 text-dark"><span class="font-weight-bold text-gray">Email:</span>
-                        {{user_details.email}}</div>
+                        {{user_details.email|safe}}</div>
                     {%endif%}
                 </ul>
 
@@ -139,43 +140,36 @@
         <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
             <!-- project card -->
             {%for project in projects|slice:":4" %}
-            <div class="card shadow-lg  mb-4 h-100" style="width: 350px;">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary text-center text-capitalize">
-                        {{project.title|truncatechars:40}}</h6>
-                </div>
-                <div class="card-body p-0 pb-3">
-                    <div class="text-center w-100 border"
-                        style="background: url('../../static/MainApp/img/undraw_posting_photo.svg'); height: 200px;background-repeat: no-repeat;background-size: 100%;">
-                    </div>
-                    <div class="container d-flex flex-column p-2" style="gap: 10px;">
-                        <div class="text-bold font-weight-bold text-success text-capitalize">User: {{project.user}}
-                        </div>
-                        <div class="text-bold font-weight-bold text-info">Posted: {{project.created_at| naturaltime}}
-                        </div>
-                        <div class="d-flex justify-content-between w-100">
-                            <div class="dropdown show w-100">
-                                <a class="btn btn-success dropdown-toggle w-100" href="#" role="button"
+            <a href="#" type="button" data-toggle="modal" data-target="#project{{ project.id }}">
+                <div class="card shadow" style="width: 350px;">
+                    <div class="card-body p-0 pb-3">
+                        <div class="text-center rounded-top d-flex justify-content-center p-3" style="background: url('../../static/MainApp/img/undraw_posting_photo.svg') rgba(0, 0, 0, 0.514);
+                        height: 200px;background-repeat: no-repeat;background-size: 100%;
+                        background-position: center; width: 349px; background-blend-mode: multiply;"></div>
+                        <div class="container d-flex flex-column p-1 pt-3 px-3" style="gap: 10px;">
+                            <h5 class="mx-1 font-weight-bold text-success text-center text-capitalize align-self-center"
+                                style="height: 50px;">
+                                {{project.title|truncatechars:40}}</h5>
+                            <div class="dropdown show">
+                                <a class="dropdown-toggle h6 font-weight-bold text-gray" href="#" role="button"
                                     id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    Tools
+                                    Skills
                                 </a>
-                                <div class="dropdown-menu  w-100" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
+                            <div class="text-bold font-weight-bold">Created: {{post.created_at| naturaltime}}
+                            </div>
+                            <div class="text-bold font-weight-bold"> By: <a class="text-capitalize"
+                                    href="{%url 'portfolio' project.user%}">{{project.user}}</a></div>
                         </div>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <p class="p-2">{{project.about|truncatechars:200}}</p>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" type="button" data-toggle="modal" data-target="#project{{ project.id }}" class="p-2">See
-                        project &rarr;</a>
                 </div>
-            </div>
-
+            </a>
             <!-- projects modal -->
             <!-- Modal -->
             <div class="modal fade" id="project{{ project.id }}" tabindex="-1" role="dialog"
@@ -189,7 +183,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{project.about}}
+                            {{project.about|safe}}
                         </div>
                         <div class="modal-footer">
                             {%if user.is_authenticated%}
@@ -203,7 +197,7 @@
             {%endfor%}
         </div>
         <div class="text-primary d-flex justify-content-end">
-            <a rel="nofollow" href="https://undraw.co/">See All Projects &rarr;</a>
+            <a rel="nofollow" href="#">See All Projects &rarr;</a>
         </div>
     </div>
     {%endif%}
@@ -407,55 +401,52 @@
         <div class="container-fluid d-flex flex-wrap w-100 justify-content-center" style="gap: 20px;">
             <!-- Post card -->
             {%for post in posts|slice:":4" %}
-            <div class="card shadow-lg  mb-4 h-100" style="width: 350px;">
-                <div class="card-body p-0 pb-3">
-                    {%if post.post_image%}
-                    <div class="text-center w-100  rounded-top d-flex justify-content-center p-3" style="background: url('{{ post.post_image.url }}') rgba(0, 0, 0, 0.514);
+            <a href="{%url 'post-detail' post.slug %}" rel="nofollow">
+                <div class="card shadow" style="width: 350px;">
+                    <div class="card-body p-0 pb-3">
+                        {%if post.post_image%}
+                        <div class="text-center w-100  rounded-top d-flex justify-content-center p-3" style="background: url('{{ post.post_image.url }}') rgba(0, 0, 0, 0.514);
                         height: 200px;background-repeat: no-repeat;background-size: 100%;
                         background-position: center; background-blend-mode: multiply;">
-                        <h4 class="m-0 font-weight-bold text-light text-center text-capitalize align-self-center">
-                            {{post.title|truncatechars:40}}</h4>
-                    </div>
-                    {%else%}
-                    <div class="text-center w-100  rounded-top d-flex justify-content-center p-3" style="background: url('../../static/MainApp/img/undraw_posting_photo.svg') rgba(0, 0, 0, 0.514);
-                        height: 200px;background-repeat: no-repeat;background-size: 100%;
-                        background-position: center; background-blend-mode: multiply;">
-                        <h4 class="m-0 font-weight-bold text-light text-center text-capitalize align-self-center">
-                            {{post.title|truncatechars:40}}</h4>
-                    </div>
-                    {%endif%}
-                    <!-- <div class="dropdown-divider"></div> -->
-
-                    <div class="container d-flex flex-column p-2" style="gap: 10px;">
-                        <div class="text-bold font-weight-bold text-success">User: {{user.username}}</div>
-                        <div class="text-bold font-weight-bold text-info">Posted: {{post.created_at| naturaltime}}
                         </div>
-                        <div class="d-flex justify-content-between w-100">
-                            <div class="dropdown show w-100">
-                                <a class="btn btn-success dropdown-toggle w-100" href="#" role="button"
+                        {%else%}
+                        <div class="text-center w-100  rounded-top d-flex justify-content-center p-3" style="background: url('../../static/MainApp/img/undraw_posting_photo.svg') rgba(0, 0, 0, 0.514);
+                        height: 200px;background-repeat: no-repeat;background-size: 100%;
+                        background-position: center; background-blend-mode: multiply;">
+
+                        </div>
+                        {%endif%}
+                        <!-- <div class="dropdown-divider"></div> -->
+
+                        <div class="container d-flex flex-column p-1 pt-3 px-3" style="gap: 10px;">
+                            <h5 class="mx-1 font-weight-bold text-success text-center text-capitalize align-self-center"
+                                style="height: 50px;">
+                                {{post.title|truncatechars:40}}</h5>
+                            <div class="dropdown show">
+                                <a class="dropdown-toggle h6 font-weight-bold text-gray" href="#" role="button"
                                     id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     Tags
                                 </a>
-                                <div class="dropdown-menu  w-100" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
+                            <div class="text-bold font-weight-bold">Posted: {{post.created_at| naturaltime}}
+                            </div>
+                            <div class="text-bold font-weight-bold"> By: <a class="text-capitalize"
+                                    href="{%url 'portfolio' post.user%}">{{post.user}}</a></div>
                         </div>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <p class="p-2">{{post.content|truncatechars:200}}</p>
-                    <div class="dropdown-divider"></div>
-                    <a href="{%url 'post-detail' post.slug %}" rel="nofollow" class="p-2">See post &rarr;</a>
-
                 </div>
-            </div>
+            </a>
+
             {%endfor%}
         </div>
         <div class="text-primary d-flex justify-content-end">
-            <a rel="nofollow" href="https://undraw.co/">See All posts &rarr;</a>
+            <a rel="nofollow" href="#">See All posts &rarr;</a>
         </div>
     </div>
     {%endif%}
@@ -484,30 +475,6 @@
                             <div class="card-body">
                                 Phone
                                 <div class="text-black-50 small">{{user_details.phone_number}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                Linkedin
-                                <div class="text-black-50 small">user.linkedin</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                tweeter (X)
-                                <div class="text-black-50 small">user.x</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                Github
-                                <div class="text-black-50 small">user.github</div>
                             </div>
                         </div>
                     </div>
