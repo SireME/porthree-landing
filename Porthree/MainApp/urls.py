@@ -1,15 +1,14 @@
 """ views: MainApp views
 """
 from django.urls import path
-from .views import signup, user_login, user_logout, index
-from .views import portfolio, blog_post, case_study
 from django.contrib.auth import views as auth_views
 from .views import (
+    user_logout,
+    portfolio,
+    signup,
+    user_login,
+    index,
     user_details_form,
-    blog_home,
-    projects,
-    resume,
-    contact,
     create_project,
     create_skill,
     create_post,
@@ -41,15 +40,7 @@ urlpatterns = [
         template_name='MainApp/password_reset_confirm.html', ), name='password_reset_confirm'),
 
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
-        template_name='MainApp/password_reset_complete.html',), name='password_reset_complete'),
-
-    # this parts are just for template dummy data display yet to be functional
-    path("blogs/", blog_home, name="blogs"),
-    path("blog_post/", blog_post, name="blog_post"),
-    path("projects/", projects, name="projects"),
-    path("case_study/", case_study, name="case_study"),
-    path("resume/", resume, name="resume"),
-    path("contact/", contact, name="contact"),
+        template_name='MainApp/password_reset_complete.html',), name='password_reset_complete')
 ]
 
 

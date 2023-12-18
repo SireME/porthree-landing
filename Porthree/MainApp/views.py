@@ -62,6 +62,11 @@ def create_skill(request):
         user_skills = Skill.objects.get(user=user)
     except Skill.DoesNotExist:
         user_skills = None
+    try:
+        # Check if data already exists for the current user
+        user_details = UserDetails.objects.get(user=user)
+    except UserDetails.DoesNotExist:
+        user_details = None
 
     if request.method == "POST":
         form = SkillForm(request.POST, instance=user_skills)
@@ -76,6 +81,7 @@ def create_skill(request):
     context = {
         "form": form,
         "user_skills": user_skills,
+        "user_details": user_details,
     }
 
     return render(request, "MainApp/create-skills.html", context)
@@ -286,75 +292,3 @@ def main_nav(request):
         "user": user,
     }
     return render(request, "base.html", context)
-
-
-def projects(request):
-    """projects view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/projects.html")
-
-
-def case_study(request):
-    """case_study view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/case-study.html")
-
-
-def blog_home(request):
-    """blog view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/blog-home.html")
-
-
-def blog_post(request):
-    """blog post view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/blog-post.html")
-
-
-def resume(request):
-    """resume view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/resume.html")
-
-
-def contact(request):
-    """contact view function
-
-    Args:
-        request (_object_): django http request
-
-    Returns:
-        _object_: interaction with template
-    """
-    return render(request, "MainApp/contact.html")

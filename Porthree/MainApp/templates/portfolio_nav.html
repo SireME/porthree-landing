@@ -59,12 +59,12 @@
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
                         role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'user-details'%}"
                         style="width: 85%;">
-                        <span>User Details</span>
+                        <span>My Details</span>
                     </a>
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
                         role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-skills'%}"
                         style="width: 85%;">
-                        <span>User Skills</span>
+                        <span>My Skills</span>
                     </a>
                 </li>
                 <div class="sidebar-heading">
@@ -75,12 +75,12 @@
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
                         role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-project' %}"
                         style="width: 85%;">
-                        <span>Project</span>
+                        <span>My Projects</span>
                     </a>
                     <a class="nav-link active bg-light text-primary border font-weight-bold" id="v-pills-home-tab"
                         role="tab" aria-controls="v-pills-home" aria-selected="true" href="{% url 'create-post' %}"
                         style="width: 85%;">
-                        <span>Post</span>
+                        <span>My Posts</span>
                     </a>
                 </li>
 
@@ -181,7 +181,7 @@
                                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span
-                                                class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
+                                                class="mr-2 d-none d-lg-inline text-gray-600 small text-capitalize">{{user.username}}</span>
                                             {%if user_details.profile_picture%}
                                             <img class="img-profile rounded-circle float-right"
                                                 src="{{user_details.profile_picture.url}}">
@@ -193,13 +193,13 @@
                                         <!-- Dropdown - User Information -->
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                             aria-labelledby="userDropdown">
-                                            <a class="dropdown-item" href="{% url 'user-details' %}">
+                                            <a class="dropdown-item" href="{% url 'portfolio' user %}">
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Profile
+                                                My Portfolio
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{% url 'user-details' %}">
                                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Settings
+                                                My details
                                             </a>
                                             <a class="dropdown-item" href="#">
                                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -247,7 +247,7 @@
                                             rel="noopener noreferrer">Open in
                                             browser</a></p>
                                     {% else %}
-                                    <p>{{user_details.user}} currently don't have a CV ono Porthree.</p>
+                                    <p>{{user_details.user}} currently don't have a CV on Porthree.</p>
                                     {% endif %}
                                 </div>
                                 <!-- <div class="modal-footer">
